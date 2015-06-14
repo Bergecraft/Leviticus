@@ -6,6 +6,8 @@ public class Blaster : MonoBehaviour {
     public float MUZZLE_VELOCITY;
 
     public Bullet prefab;
+
+    public float lastFire;
 	// Use this for initialization
 	void Start () {
 	    
@@ -17,9 +19,13 @@ public class Blaster : MonoBehaviour {
 	}
     public void Fire()
     {
-        var bullet = Instantiate(prefab);
-        bullet.transform.position = transform.position;
-        bullet.GetComponent<Rigidbody2D>().velocity = MUZZLE_VELOCITY * transform.up;
+        if (Time.time - lastFire > FIRE_RATE)
+        {
+            lastFire = Time.time;
+            var bullet = Instantiate(prefab);
+            bullet.transform.position = transform.position;
+            bullet.GetComponent<Rigidbody2D>().velocity = MUZZLE_VELOCITY * transform.up;
+        }
         
     }
 }

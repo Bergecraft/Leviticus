@@ -8,16 +8,24 @@ public class SpacecraftController : MonoBehaviour {
     public float MANEUVERING_THRUST = 1000;
     public float DRAG_COEFF = 1.0f;
 
-    private MainThruster[] mainThrusters;
-    private Blaster[] blasters;
+    protected MainThruster[] mainThrusters;
+    protected Blaster[] blasters;
+    protected float throttle = 1.0f;
+
+    private float health;
+    public float MAX_HEALTH = 100;
 
     [Header("Debug")]
     public float velocity;
 
+    StatusBar status;
 	// Use this for initialization
 	void Start () {
         mainThrusters = transform.GetComponentsInChildren<MainThruster>();
         blasters = transform.GetComponentsInChildren<Blaster>();
+
+        status = Instantiate(Resources.Load<StatusBar>("Status"));
+        health = MAX_HEALTH;
 	}
     public void FirePrimary()
     {
@@ -40,12 +48,26 @@ public class SpacecraftController : MonoBehaviour {
             thruster.Deactivate();
         }
     }
+    public void Damage(float damage)
+    {
+        health = Mathf.Clamp(health - damage, 0, MAX_HEALTH);
+        if (health == 0)
+        {
+            var explo = Instantiate(Resources.Load<Transform>("Explosion"));
+            explo.position = this.transform.position;
+            Destroy(this.gameObject);
+            Destroy(explo.gameObject,5);
+            Destroy(status.gameObject);
+        }
+    }
 	// Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         velocity = GetComponent<Rigidbody2D>().velocity.magnitude;
+        status.transform.position = transform.position;
+        status.UpdateHealth(health / MAX_HEALTH);
 	}
-    public void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         ApplyDrag();
         ApplyThrust();
@@ -60,7 +82,7 @@ public class SpacecraftController : MonoBehaviour {
     {
         foreach (var thruster in mainThrusters)
         {
-            GetComponent<Rigidbody2D>().AddForceAtPosition(thruster.ThrustVector, thruster.position2d);
+            GetComponent<Rigidbody2D>().AddForceAtPosition(thruster.ThrustVector * throttle, thruster.position2d);
         }
     }
     protected void RotateTowards(Vector2 target)

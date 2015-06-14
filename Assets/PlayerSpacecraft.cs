@@ -5,11 +5,12 @@ public class PlayerSpacecraft : SpacecraftController
 {
     public bool autoRotate = true;
     public bool reverse = false;
-    public void FixedUpdate()
+    public override void Update()
     {
-        base.FixedUpdate();
+        base.Update();
+
         HandleKeysForThrust();
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             FirePrimary();
         }
@@ -17,6 +18,10 @@ public class PlayerSpacecraft : SpacecraftController
         {
             autoRotate = !autoRotate;
         }
+    }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
         if (reverse)
         {
             var target = GetComponent<Rigidbody2D>().position - GetComponent<Rigidbody2D>().velocity;
