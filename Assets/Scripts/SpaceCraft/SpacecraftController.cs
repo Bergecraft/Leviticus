@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Assets;
+using Newtonsoft.Json;
+using System.IO;
+using System.Runtime.Serialization;
 
 public class SpacecraftController : MonoBehaviour {
 
@@ -96,4 +100,13 @@ public class SpacecraftController : MonoBehaviour {
 
         GetComponent<Rigidbody2D>().MoveRotation(quat.eulerAngles.z);
     }
+
+    public void ExportToFile(string fileName)
+    {
+        var tw = new SpacecraftWrapper<SpacecraftController>(this);
+        var json = JsonConvert.SerializeObject(tw, Formatting.Indented);
+        //var json = JsonConvert.SerializeObject(transform);
+        File.WriteAllText(fileName, json);
+    }
 }
+

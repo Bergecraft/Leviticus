@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour {
 
-    private float ARM_TIME = 1.0f;
-    private float MAX_AGE = 5;
+    public float ARM_TIME = 1.0f;
+    public float MAX_AGE = 5;
     //public Vector3 velocity;
 	// Use this for initialization
 	void Start () {
@@ -18,8 +18,8 @@ public class Bullet : MonoBehaviour {
         if (other.gameObject.GetComponent<SpacecraftController>() != null)
         {
             other.gameObject.GetComponent<SpacecraftController>().Damage(1);
+            Destroy(this.gameObject);
         }
-        Destroy(this.gameObject);
         //}
     }
 }
