@@ -7,7 +7,7 @@ public class Blaster : MonoBehaviour {
 
     public Bullet prefab;
 
-    public float lastFire;
+    private float lastFire;
 	// Use this for initialization
 	void Start () {
 	    

@@ -4,13 +4,15 @@ using System.Linq;
 
 public class SkyGenerator : MonoBehaviour {
     public Transform STAR_PREFAB;
+    public int NUM_STARS = 70000;
+    public float RADIUS = 800;
 	// Use this for initialization
 	void Start () {
         var background = new GameObject("Background");
         background.transform.parent = this.transform;
-	    foreach(var i in Enumerable.Range(0,50000)){
+	    foreach(var i in Enumerable.Range(0,NUM_STARS)){
             var star = Instantiate(STAR_PREFAB);
-            var pos = Random.insideUnitCircle*1000;
+            var pos = Random.insideUnitCircle * RADIUS;
             star.position = new Vector3(pos.x,pos.y,10);
             star.parent = background.transform;
             star.GetComponent<SpriteRenderer>().color = GetRandomStarColor();
