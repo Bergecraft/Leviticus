@@ -23,6 +23,7 @@ public class Blaster : MonoBehaviour {
         {
             lastFire = Time.time;
             var bullet = Instantiate(prefab);
+            bullet.source = transform.GetComponentInParent<SpacecraftController>();
             bullet.transform.position = transform.position;
             bullet.GetComponent<Rigidbody2D>().velocity = MUZZLE_VELOCITY * transform.up;
         }

@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour {
     public float MAX_AGE = 5;
     //public Vector3 velocity;
 	// Use this for initialization
+    public SpacecraftController source;
 	void Start () {
         Destroy(this.gameObject, MAX_AGE);
 	}
@@ -15,9 +16,10 @@ public class Bullet : MonoBehaviour {
     {
         //if (Time.time - createTime > ARM_TIME)
         //{
-        if (other.gameObject.GetComponent<SpacecraftController>() != null)
+        var otherShip = other.gameObject.GetComponent<SpacecraftController>();
+        if (otherShip!=source && otherShip != null)
         {
-            other.gameObject.GetComponent<SpacecraftController>().Damage(1);
+            otherShip.Damage(1);
             Destroy(this.gameObject);
         }
         //}
