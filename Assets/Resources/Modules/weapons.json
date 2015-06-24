@@ -1,0 +1,42 @@
+{
+	"weaponDefs":[
+		{"name":"blaster",
+		 "type":"hybrid",
+		 "spritePath":"modules/Hardpoints_xcf-Blaster__6px_",
+		 "spriteColor": {"r":1,"g":1,"b":1,"a":1},
+		 "energyCost":5,
+		 "cooldown":0.3,
+		 "hardpointSize":6,
+		 "ammoSize":6,
+		 "slots":[],
+		 "force":400,
+		 "accuracy":0.9,
+		 "validAmmoType":"hybrid"},
+		 
+		{"name":"dual blaster",
+		 "type":"hybrid",
+		 "spritePath":"modules/Hardpoints_xcf-Dual Blaster__8px_",
+		 "spriteColor": {"r":1,"g":1,"b":1,"a":1},
+		 "energyCost":5,
+		 "cooldown":0.45,
+		 "hardpointSize":8,
+		 "ammoSize":6,
+		 "slots":[],
+		 "force":400,
+		 "accuracy":0.8,
+		 "validAmmoType":"hybrid"}
+	],
+	"ammoDefs":[
+		{"name":"small_hybrid",
+		 "type":"hybrid",
+		 "spritePath":"modules/Hardpoints_xcf-6px_Blaster_Ammo",
+		 "spriteColor": {"r":0,"g":1,"b":0,"a":1},
+		 "size":6,
+		 "damageVelocityScalar":0.05,
+		 "bonusDamage":2,
+		 "explosiveForce":100,
+		 "mass":10,
+		 "lifetime": 0.2,
+		 "accuracy":0.9}
+	]
+}

@@ -18,6 +18,7 @@ public class CameraController : MonoBehaviour {
         camera.orthographicSize = Mathf.Clamp(camera.orthographicSize -Input.GetAxis("Mouse ScrollWheel") * zoomSpeed,minZoom, maxZoom);
 
 
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, target.position.y, - 10), panSpeed * Time.deltaTime);
+        //transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, target.position.y, - 10), panSpeed * Time.deltaTime);
+        transform.position = new Vector3(target.position.x, target.position.y, -10);
 	}
 }

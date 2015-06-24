@@ -20,7 +20,8 @@ namespace Assets.SpaceCraft
 
             var offset = target.position - transform.position;
 
-            var bulletTravelTimeToTarget = offset.magnitude / blasters[0].MUZZLE_VELOCITY;
+            var ammoVelocity = blasters[0].def.force /blasters[0].ammodef.mass; // TODO: Check this
+            var bulletTravelTimeToTarget = offset.magnitude / ammoVelocity;
             var projectedOffset = target.GetComponent<Rigidbody2D>().velocity * bulletTravelTimeToTarget;
             targetPosition = target.position + new Vector3(projectedOffset.x, projectedOffset.y, 0);
             projectedOffset = targetPosition - transform.position;

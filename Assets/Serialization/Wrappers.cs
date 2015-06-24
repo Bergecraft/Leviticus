@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Assets.Modules.Weapons;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,33 +99,17 @@ namespace Assets
             get { return model.DRAG_COEFF; }
             set { model.DRAG_COEFF = value; }
         }
-        public BlasterWrapper<Blaster>[] blasters;
+        public WeaponDef[] weapons;
         public ThrusterWrapper<MainThruster>[] mainThrusters;
         public SpacecraftWrapper(T t)
             : base(t)
         {
             //children = Enumerable.Range(0, model.childCount).Select(i => new TransformWrapper(model.GetChild(i))).ToArray();
-            blasters = model.transform.GetComponentsInChildren<Blaster>().Select(b => new BlasterWrapper<Blaster>(b)).ToArray();
+            weapons = model.transform.GetComponentsInChildren<Weapon>().Select(b => b.def).ToArray();
             mainThrusters = model.transform.GetComponentsInChildren<MainThruster>().Select(b => new ThrusterWrapper<MainThruster>(b)).ToArray();
         }
     }
-    public class BlasterWrapper<T> : MonoBehaviourWrapper<T> where T : Blaster
-    {
-        public float FIRE_RATE
-        {
-            get { return model.FIRE_RATE; }
-            set { model.FIRE_RATE = value; }
-        }
-        public float MAIN_THRUST
-        {
-            get { return model.MUZZLE_VELOCITY; }
-            set { model.MUZZLE_VELOCITY = value; }
-        }
-        public BlasterWrapper(T t)
-            : base(t)
-        {
-        }
-    }
+    
     public class ThrusterWrapper<T> : MonoBehaviourWrapper<T> where T : MainThruster
     {
         public float THRUST

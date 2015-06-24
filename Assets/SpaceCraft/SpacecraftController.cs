@@ -13,7 +13,7 @@ public class SpacecraftController : MonoBehaviour {
     public float DRAG_COEFF = 1.0f;
 
     protected MainThruster[] mainThrusters;
-    protected Blaster[] blasters;
+    protected Weapon[] blasters;
     protected float throttle = 1.0f;
 
     private float health;
@@ -26,7 +26,7 @@ public class SpacecraftController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         mainThrusters = transform.GetComponentsInChildren<MainThruster>();
-        blasters = transform.GetComponentsInChildren<Blaster>();
+        blasters = transform.GetComponentsInChildren<Weapon>();
 
         status = Instantiate(Resources.Load<StatusBar>("Status"));
         health = MAX_HEALTH;
