@@ -19,6 +19,9 @@ public class CameraController : MonoBehaviour {
 
 
         //transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, target.position.y, - 10), panSpeed * Time.deltaTime);
-        transform.position = new Vector3(target.position.x, target.position.y, -10);
+        if (target != null)
+        {
+            transform.position = new Vector3(target.position.x, target.position.y, -10);
+        }
 	}
 }

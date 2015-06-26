@@ -4,6 +4,7 @@ using Assets;
 using Newtonsoft.Json;
 using System.IO;
 using System.Runtime.Serialization;
+using DG.Tweening;
 
 public class SpacecraftController : MonoBehaviour {
 
@@ -62,6 +63,10 @@ public class SpacecraftController : MonoBehaviour {
             Destroy(this.gameObject);
             Destroy(explo.gameObject,5);
             Destroy(status.gameObject);
+            DOTween.To(() => Time.timeScale, (t) => Time.timeScale = t, 0.1f, 0.5f);
+            DOTween.To(() => Camera.main.orthographicSize, (s) => Camera.main.orthographicSize = s, 2, 3);
+            var theEnd = GameObject.Find("The End").GetComponent<CanvasGroup>();
+            DOTween.To(() => theEnd.alpha, (a) => theEnd.alpha = a, 1.0f, 10f);
         }
     }
 	// Update is called once per frame
