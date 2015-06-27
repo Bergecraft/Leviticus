@@ -64,9 +64,10 @@ public class SpacecraftController : MonoBehaviour {
             Destroy(explo.gameObject,5);
             Destroy(status.gameObject);
             DOTween.To(() => Time.timeScale, (t) => Time.timeScale = t, 0.1f, 0.5f);
-            DOTween.To(() => Camera.main.orthographicSize, (s) => Camera.main.orthographicSize = s, 2, 3);
+            DOTween.To(() => Time.fixedDeltaTime, (t) => Time.fixedDeltaTime = t, 0.1f*0.02f, 0.5f);
+            DOTween.To(() => Camera.main.orthographicSize, (s) => Camera.main.orthographicSize = s, 2, 1);
             var theEnd = GameObject.Find("The End").GetComponent<CanvasGroup>();
-            DOTween.To(() => theEnd.alpha, (a) => theEnd.alpha = a, 1.0f, 10f);
+            DOTween.To(() => theEnd.alpha, (a) => theEnd.alpha = a, 1.0f, 1f);
         }
     }
 	// Update is called once per frame
@@ -106,12 +107,13 @@ public class SpacecraftController : MonoBehaviour {
         GetComponent<Rigidbody2D>().MoveRotation(quat.eulerAngles.z);
     }
 
-    public void ExportToFile(string fileName)
+    public string ToJson()
     {
         var tw = new SpacecraftWrapper<SpacecraftController>(this);
         var json = JsonConvert.SerializeObject(tw, Formatting.Indented);
         //var json = JsonConvert.SerializeObject(transform);
-        File.WriteAllText(fileName, json);
+        return json;
+        //File.WriteAllText(fileName, json);
     }
 }
 

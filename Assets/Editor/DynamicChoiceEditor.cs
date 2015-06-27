@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEditor;
 
-namespace Assets.Serialization
+namespace Assets
 {
     public abstract class DynamicChoiceEditor : Editor
     {

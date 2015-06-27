@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Assets.Serialization;
 using Assets.Modules;
 using System.Linq;
-using UnityEditor;
 using Assets.Modules.Weapons;
 
 public class Weapon : MonoBehaviour {
@@ -69,21 +67,5 @@ public class Weapon : MonoBehaviour {
             var rigidbody = ammoPrefab.AddComponent<Rigidbody2D>();
             rigidbody.mass = ammodef.mass;
         }
-    }
-}
-
-[CustomEditor(typeof(Weapon))]
-public class WeaponEditor : DynamicChoiceEditor
-{
-    public override string[] getChoices()
-    {
-        ModuleManager.LoadWeaponsJson();
-        return ModuleManager.weaponDefs.Values.Select(w => w.fullName).ToArray();
-    }
-    public override void setSelected(string selected)
-    {
-        var someClass = (Weapon)target;
-        // Update the selected choice in the underlying object
-        someClass.selectedWeapon = selected;
     }
 }

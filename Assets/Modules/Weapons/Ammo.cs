@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Assets.Serialization;
 using Assets.Modules;
 using System.Linq;
-using UnityEditor;
 using Assets.Modules.Weapons;
 
 public class Ammo : MonoBehaviour {

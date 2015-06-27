@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 namespace Assets.SpaceCraft
 {
@@ -48,14 +49,23 @@ namespace Assets.SpaceCraft
             else
             {
                 DeactivateThrusters();
+
+                var ships = GameObject.FindObjectsOfType<SpacecraftController>().Where(s => s != this).OrderBy(s => (s.transform.position - transform.position).magnitude).ToArray();
+                if (ships.Length > 0)
+                {
+                    target = ships[0].transform;
+                }
             }
         }
         public void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.red * 0.5f;
-            Gizmos.DrawSphere(target.position, 1);
-            Gizmos.color = Color.blue * 0.5f;
-            Gizmos.DrawSphere(targetPosition, 1);
+            if (target != null)
+            {
+                Gizmos.color = Color.red * 0.5f;
+                Gizmos.DrawSphere(target.position, 1);
+                Gizmos.color = Color.blue * 0.5f;
+                Gizmos.DrawSphere(targetPosition, 1);
+            }
         }
     }
 }

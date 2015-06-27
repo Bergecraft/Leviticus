@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Assets.Modules
 {
-    class ModuleManager : MonoBehaviour
+    public class ModuleManager : MonoBehaviour
     {
         public static Dictionary<string, WeaponDef> weaponDefs = new Dictionary<string, WeaponDef>();
         public static Dictionary<string, AmmoDef> ammoDefs = new Dictionary<string, AmmoDef>();
@@ -20,7 +20,8 @@ namespace Assets.Modules
         }
         public static void LoadWeaponsJson()
         {
-            var weaponsJsonText = File.ReadAllText("Assets/Resources/Modules/weapons.json");
+            var weaponsJsonText = Resources.Load<TextAsset>("Modules/weapons").text;
+            //var weaponsJsonText = File.ReadAllLines("Assets/Resources/Modules/weapons.json").Aggregate((sum,s) => sum + "\n" + s);
             var WeaponsJson = JsonConvert.DeserializeObject<WeaponsJson>(weaponsJsonText);
 
             foreach (var def in WeaponsJson.weaponDefs)

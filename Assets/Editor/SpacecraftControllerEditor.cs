@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEditor;
 using Assets.SpaceCraft;
+using System.IO;
 
 namespace Assets
 {
@@ -20,7 +21,8 @@ namespace Assets
                 SpacecraftController myScript = (SpacecraftController)target;
                 if(GUILayout.Button("Export"))
                 {
-                    myScript.ExportToFile(fileName);
+                    var json = myScript.ToJson();
+                    File.WriteAllText(fileName, json);
                 }
             GUILayout.EndHorizontal();
         }
