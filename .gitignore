@@ -33,3 +33,5 @@ ehthumbs.db
 /TestResults
 /bin
 /LeviticusBuild
+/UnityVS.Leviticus.CSharp.Test/Properties
+/UnityVS.Leviticus.CSharp.Test/bin/Debug

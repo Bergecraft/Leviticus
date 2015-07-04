@@ -1,4 +1,5 @@
-﻿using Assets.Modules;
+﻿using Assets.Entities;
+using Assets.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using UnityEditor;
 
 namespace Assets
 {
-    public abstract class DynamicChoiceEditor : Editor
+    public abstract class DynamicChoiceEditor<T> : Editor where T : EntityDef
     {
         string[] _choices;
         int _choiceIndex = 0;
@@ -21,16 +22,33 @@ namespace Assets
             //var someClass = (T) target ;
             // Update the selected choice in the underlying object
             //someClass.selection = getChoices()[_choiceIndex];
-            if (getChoices().Length > _choiceIndex)
+            if (getChoices().Length > _choiceIndex && _choiceIndex>0)
             {
                 setSelected(getChoices()[_choiceIndex]);
                 // Save the changes back to the object
-                EditorUtility.SetDirty(target);
+                foreach (var target in targets)
+                {
+                    EditorUtility.SetDirty(target);
+                }
             }
         }
 
-        public abstract string[] getChoices();
+        public string[] getChoices()
+        {
+            DefinitionManager.LoadWeaponsJson();
+            var choices = DefinitionManager.GetAllDefinitions<T>().Select(w => w.definitionType).ToList();
+            choices.Insert(0, "");
+            return choices.ToArray();
+        }
 
-        public abstract void setSelected(string selected);
+        public void setSelected(string selected)
+        {
+            foreach (var target in targets)
+            {
+                var someClass = (DefinitionBehaviour<T>)target;
+                // Update the selected choice in the underlying object
+                someClass.selectedDefinition = selected;
+            }
+        }
     }
 }

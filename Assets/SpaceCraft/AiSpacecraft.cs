@@ -14,7 +14,7 @@ namespace Assets.SpaceCraft
 
             if (target != null)
             {
-                if (targetPosition != null)
+                if (targetPosition != null && (target.position - transform.position).magnitude>8)
                     RotateTowards(targetPosition);
             }
         }
@@ -22,12 +22,12 @@ namespace Assets.SpaceCraft
         {
             base.Update();
 
-            if (target != null)
+            if (target != null && target.gameObject.activeInHierarchy)
             {
-                var offset = target.position - transform.position;
+                var distance = target.position - transform.position;
 
                 var ammoVelocity = blasters[0].def.force /blasters[0].ammodef.mass; // TODO: Check this
-                var bulletTravelTimeToTarget = offset.magnitude / ammoVelocity;
+                var bulletTravelTimeToTarget = distance.magnitude / ammoVelocity;
                 var projectedOffset = target.GetComponent<Rigidbody2D>().velocity * bulletTravelTimeToTarget;
                 targetPosition = target.position + new Vector3(projectedOffset.x, projectedOffset.y, 0);
                 projectedOffset = targetPosition - transform.position;
@@ -37,7 +37,7 @@ namespace Assets.SpaceCraft
                 {
                     FirePrimary();
                 }
-                if (dot > 0.8f)
+                if (dot > 0.6f || distance.magnitude < 8 )
                 {
                     ActiveThrusters();
                 }
@@ -50,10 +50,12 @@ namespace Assets.SpaceCraft
             {
                 DeactivateThrusters();
 
-                var ships = GameObject.FindObjectsOfType<SpacecraftController>().Where(s => s != this).OrderBy(s => (s.transform.position - transform.position).magnitude).ToArray();
+                GameObject.FindObjectOfType<MessageController>().AddMessage("AI has no target", Color.red);
+                var ships = GameObject.FindObjectsOfType<SpacecraftController>().Where(s => s != this && s.faction!=this.faction && s.isActiveAndEnabled).OrderBy(s => (s.transform.position - transform.position).magnitude).ToArray();
                 if (ships.Length > 0)
                 {
                     target = ships[0].transform;
+                    GameObject.FindObjectOfType<MessageController>().AddMessage("AI found target", Color.green);
                 }
             }
         }

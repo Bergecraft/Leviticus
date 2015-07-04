@@ -1,4 +1,6 @@
-﻿using Assets.Modules.Weapons;
+﻿using Assets.Entities.Modules.Thrusters;
+using Assets.Entities.Modules.Weapons;
+using Assets.Serialization;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -80,46 +82,19 @@ namespace Assets
     }
     public class SpacecraftWrapper<T> : MonoBehaviourWrapper<T> where T : SpacecraftController
     {
-        public float ROTATE_SPEED{
-            get { return model.ROTATE_SPEED;}
-            set { model.ROTATE_SPEED = value; }
-        }
-        public float MAIN_THRUST
-        {
-            get { return model.MAIN_THRUST; }
-            set { model.MAIN_THRUST = value; }
-        }
-        public float MANEUVERING_THRUST
-        {
-            get { return model.MANEUVERING_THRUST; }
-            set { model.MANEUVERING_THRUST = value; }
-        }
         public float DRAG_COEFF
         {
             get { return model.DRAG_COEFF; }
             set { model.DRAG_COEFF = value; }
         }
         public WeaponDef[] weapons;
-        public ThrusterWrapper<MainThruster>[] mainThrusters;
+        public ThrusterDef[] mainThrusters;
         public SpacecraftWrapper(T t)
             : base(t)
         {
             //children = Enumerable.Range(0, model.childCount).Select(i => new TransformWrapper(model.GetChild(i))).ToArray();
-            weapons = model.transform.GetComponentsInChildren<Weapon>().Select(b => b.def).ToArray();
-            mainThrusters = model.transform.GetComponentsInChildren<MainThruster>().Select(b => new ThrusterWrapper<MainThruster>(b)).ToArray();
-        }
-    }
-    
-    public class ThrusterWrapper<T> : MonoBehaviourWrapper<T> where T : MainThruster
-    {
-        public float THRUST
-        {
-            get { return model.THRUST; }
-            set { model.THRUST = value; }
-        }
-        public ThrusterWrapper(T t)
-            : base(t)
-        {
+            weapons = model.transform.GetComponentsInChildren<WeaponBehaviour>().Select(b => b.def).ToArray();
+            mainThrusters = model.transform.GetComponentsInChildren<MainThrusterBehaviour>().Select(b => b.def).ToArray();
         }
     }
 
