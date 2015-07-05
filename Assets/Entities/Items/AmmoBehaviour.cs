@@ -9,6 +9,10 @@ using Assets.Entities.Modules;
 
 public class AmmoBehaviour : SpriteBehaviour<AmmoDef>
 {
+    void Awake()
+    {
+
+    }
     void Start()
     {
         //base.Start();

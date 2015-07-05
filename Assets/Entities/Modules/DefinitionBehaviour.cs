@@ -16,6 +16,10 @@ namespace Assets.Modules
             {
                 def = DefinitionManager.GetDefinition<T>(selectedDefinition);
             }
+            else
+            {
+                def = null;
+            }
         }
         public void setDefinition(string definition)
         {

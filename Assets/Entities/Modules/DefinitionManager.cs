@@ -47,7 +47,11 @@ namespace Assets.Modules
         }
         public static List<T> GetAllDefinitions<T>() where T : EntityDef
         {
-            return defs[typeof(T)].Values.Select(e => (T)e).ToList();
+            if (defs.ContainsKey(typeof(T)))
+            {
+                return defs[typeof(T)].Values.Select(e => (T)e).ToList();
+            }
+            return new List<T>();
         }
         public static void LoadWeaponsJson()
         {
@@ -66,6 +70,10 @@ namespace Assets.Modules
                 //ammoDefs[def.definitionType] = def;
             }
             foreach (var def in WeaponsJson.thrusterDefs)
+            {
+                AddDefinition(def);
+            }
+            foreach (var def in WeaponsJson.moduleDefs)
             {
                 AddDefinition(def);
             }

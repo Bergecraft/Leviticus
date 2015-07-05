@@ -11,7 +11,6 @@ namespace Assets.Entities.Modules
     public class ModuleDef : ItemDef
     {
         public Hardpoint.HardpointSize hardpointSize { get; set; }
-        public int ammoSize { get; set; }
-        public Transform[] slots { get; set; }
+        public HardpointDef[] hardpoints { get; set; }
     }
 }

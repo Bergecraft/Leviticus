@@ -13,7 +13,7 @@ namespace Assets.Modules
         public enum HardpointType { none, fuel, hydrogen, };
         public HardpointType type;
         const string HARDPOINT_TEMPLATE = "modules/Hardpoints_xcf-{0}px_Hardpoint";
-        void OnValidate()
+        public void OnValidate()
         {
             if (GetComponent<SpriteRenderer>() == null)
             {

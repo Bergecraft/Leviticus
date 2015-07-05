@@ -8,7 +8,7 @@
 		 "mass":50,
 		 "hardpointSize":6,
 		 "ammoSize":6,
-		 "slots":[],
+		 "hardpoints":[],
 		 "force":100,
 		 "accuracy":0.8,
 		 "validAmmoType":"hybrid"},
@@ -21,7 +21,7 @@
 		 "mass":100,
 		 "hardpointSize":6,
 		 "ammoSize":6,
-		 "slots":[],
+		 "hardpoints":[],
 		 "force":200,
 		 "accuracy":0.9,
 		 "validAmmoType":"hybrid"},
@@ -34,7 +34,7 @@
 		 "mass":250,
 		 "hardpointSize":8,
 		 "ammoSize":6,
-		 "slots":[],
+		 "hardpoints":[],
 		 "force":300,
 		 "accuracy":0.95,
 		 "validAmmoType":"hybrid"}
@@ -55,7 +55,7 @@
 		{"definitionType":"RCS/small RCS",
 		 "spritePath":"modules/Hardpoints_xcf-RCS__6px_",
 		 "spriteColor": {"r":0.7,"g":0.7,"b":0.7,"a":1},
-		 "size":6,
+		 "hardpointSize":6,
 		 "thrust":200,
 		 "omnidirectional":true,
 		 "specificImpulse":100,
@@ -64,11 +64,32 @@
 		{"definitionType":"Thruster/Main",
 		 "spritePath":"modules/Hardpoints_xcf-Main_Thruster__12px_",
 		 "spriteColor": {"r":0.7,"g":0.7,"b":0.7,"a":1},
-		 "size":12,
+		 "hardpointSize":12,
 		 "thrust":5000,
 		 "omnidirectional":false,
 		 "specificImpulse":100,
 		 "fuelType":"hydrogen"
+		}
+	],
+	"moduleDefs":[
+		{"definitionType":"Turret/Double Auto Turret",
+		 "spritePath":"modules/Hardpoints_xcf-Turret_Mount__16px_",
+		 "spriteColor": {"r":0.7,"g":0.7,"b":0.7,"a":1},
+		 "hardpointSize":16,
+		 "hardpoints":[
+			{
+			"name":"right",
+			"size":6,
+			"position":{"x":0.08,"y":0,"z":0},
+			"scale":{"x":1,"y":1,"z":1}
+			},
+			{
+			"name":"left",
+			"size":6,
+			"position":{"x":-0.08,"y":0,"z":0},
+			"scale":{"x":1,"y":1,"z":1}
+			}
+		 ]
 		}
 	]
 }

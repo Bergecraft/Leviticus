@@ -9,6 +9,7 @@ namespace Assets.Entities.Modules.Weapons
     {
         public float force { get; set; }
         public float accuracy { get; set; }
+        public int ammoSize { get; set; }
         public string validAmmoType { get; set; }
     }
 }

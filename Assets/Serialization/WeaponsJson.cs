@@ -1,4 +1,5 @@
 ﻿using Assets.Entities.Items;
+using Assets.Entities.Modules;
 using Assets.Entities.Modules.Thrusters;
 using Assets.Entities.Modules.Weapons;
 using System;
@@ -13,5 +14,6 @@ namespace Assets.Serialization
         public WeaponDef[] weaponDefs;
         public AmmoDef[] ammoDefs;
         public ThrusterDef[] thrusterDefs;
+        public ModuleDef[] moduleDefs;
     }
 }

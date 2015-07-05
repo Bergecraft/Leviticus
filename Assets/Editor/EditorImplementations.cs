@@ -6,6 +6,7 @@ using UnityEditor;
 using Assets.Modules;
 using Assets.Entities.Modules.Weapons;
 using Assets.Entities.Modules.Thrusters;
+using Assets.Entities.Modules;
 
 namespace Assets
 {
@@ -26,6 +27,12 @@ namespace Assets
     [CustomEditor(typeof(RCSBehaviour))]
     [CanEditMultipleObjects]
     public class RCSEditor : DynamicChoiceEditor<ThrusterDef>
+    {
+
+    }
+    [CustomEditor(typeof(ModuleBehaviour))]
+    [CanEditMultipleObjects]
+    public class ModuleEditor : DynamicChoiceEditor<ModuleDef>
     {
 
     }
