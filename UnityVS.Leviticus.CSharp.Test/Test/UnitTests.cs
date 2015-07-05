@@ -5,6 +5,7 @@ using UnityEngine;
 using Assets;
 using Assets.Serialization;
 using System.IO;
+using System.Linq;
 
 namespace UnityVS.Leviticus.CSharp.Test
 {
@@ -57,6 +58,37 @@ namespace UnityVS.Leviticus.CSharp.Test
             //var weaponsJsonText = File.ReadAllLines("Assets/Resources/Modules/weapons.json").Aggregate((sum,s) => sum + "\n" + s);
             var WeaponsJson = JsonConvert.DeserializeObject<WeaponsJson>(weaponsJsonText);
 
+        }
+        [TestMethod]
+        public void TestRCS()
+        {
+            AssertDots(1, Vector3.up, 0, 0, 0, 1);
+            AssertDots(-1, Vector3.up, 0, 1, 0, 0);
+            AssertDots(1, new Vector3(1, 1, 0), Mathf.Sqrt(2)/2, 0, 0, Mathf.Sqrt(2)/2);
+        }
+        private void AssertDots(float torque, Vector3 position, params float[] expected)
+        {
+            var perp = CalculatePerp(position, torque);
+            var exhaust = new Vector3[] { Vector3.up, Vector3.right, Vector3.down, Vector3.left };
+            var dots = exhaust.Select(v => Mathf.Max(Vector3.Dot(perp, v), 0)).ToArray();
+
+            foreach (var dot in dots)
+            {
+                Console.Write(dot + " ");
+            }
+            Console.WriteLine();
+            CollectionAssert.AreEqual(dots, expected);
+        }
+        private Vector3 CalculatePerp(Vector3 position, float direction)
+        {
+            if (direction > 0)
+            {
+                return Vector3.Cross(Vector3.forward, position).normalized;
+            }
+            else
+            {
+                return Vector3.Cross(position, Vector3.forward).normalized;
+            }
         }
     }
 }

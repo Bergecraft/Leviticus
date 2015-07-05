@@ -148,11 +148,16 @@ public class SpacecraftController : MonoBehaviour {
         var sign = Vector3.Cross(targetRotation, transform.up);
         angle = -Mathf.Sign(sign.z) * angle;
         var vel = GetComponent<Rigidbody2D>().angularVelocity;
-        GetComponent<Rigidbody2D>().AddTorque(ROTATE_SPEED * (angle/180 - vel/400));
+        var torque = ROTATE_SPEED * (angle/180 - Mathf.Clamp(vel,-400, 400)/400);
+        GetComponent<Rigidbody2D>().AddTorque(torque);
         //var lookRot = Quaternion.LookRotation(Vector3.forward, target - transform.position);
         //var quat = Quaternion.RotateTowards(transform.rotation, lookRot, ROTATE_SPEED * Time.fixedDeltaTime);
 
         //GetComponent<Rigidbody2D>().MoveRotation(quat.eulerAngles.z);
+        foreach (var r in rcs)
+        {
+            r.updateExhausts(torque);
+        }
     }
 
     public string ToJson()
