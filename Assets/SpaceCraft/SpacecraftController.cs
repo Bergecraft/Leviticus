@@ -51,7 +51,7 @@ public class SpacecraftController : MonoBehaviour {
             blaster.Fire();
         }
     }
-    public void ActiveThrusters()
+    public void ActivateThrusters()
     {
         foreach (var thruster in mainThrusters)
         {
@@ -70,7 +70,7 @@ public class SpacecraftController : MonoBehaviour {
         var overflow = -Mathf.Min(shield - damage, 0);
         shield = Mathf.Clamp(shield - damage, 0, MAX_SHIELD);
         health = Mathf.Clamp(health - overflow, 0, MAX_HEALTH);
-        GameObject.FindObjectOfType<MessageController>().AddMessage(damage.ToString("n2") + " damage");
+        //GameObject.FindObjectOfType<MessageController>().AddMessage(damage.ToString("n2") + " damage");
                 
         if (health == 0)
         {

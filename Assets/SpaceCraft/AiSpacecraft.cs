@@ -14,10 +14,12 @@ namespace Assets.SpaceCraft
 
             if (target != null)
             {
-                if (targetPosition != null && (target.position - transform.position).magnitude>8)
+                if (targetPosition != null && (target.position - transform.position).magnitude>4)
                     TorqueTowards(targetPosition);
             }
         }
+        float lastSearchTime = 0;
+        const float TIME_BETWEEN_SEARCHES = 0.5f;
         public override void Update()
         {
             base.Update();
@@ -35,20 +37,20 @@ namespace Assets.SpaceCraft
 
                 foreach (var blaster in blasters)
                 {
-                    var blastdot = Vector2.Dot(projectedOffset.normalized, blaster.transform.up);
+                    var blastdot = Vector2.Dot(projectedOffset, blaster.transform.up);
                     if (blastdot > 0.90f)
                     {
                         blaster.Fire();
                     }
                 }
-                var dot = Vector2.Dot(projectedOffset.normalized, transform.up);
+                var dot = Vector2.Dot(projectedOffset, transform.up);
                 //if (dot > 0.90f)
                 //{
                 //    FirePrimary();
                 //}
-                if (dot > 0.6f || distance.magnitude < 8 )
+                if (dot > 0.9f || distance.magnitude < 4 )
                 {
-                    ActiveThrusters();
+                    ActivateThrusters();
                 }
                 else
                 {
@@ -59,12 +61,18 @@ namespace Assets.SpaceCraft
             {
                 DeactivateThrusters();
 
-                GameObject.FindObjectOfType<MessageController>().AddMessage("AI has no target", Color.red);
-                var ships = GameObject.FindObjectsOfType<SpacecraftController>().Where(s => s != this && s.faction!=this.faction && s.isActiveAndEnabled).OrderBy(s => (s.transform.position - transform.position).magnitude).ToArray();
-                if (ships.Length > 0)
+                //GameObject.FindObjectOfType<MessageController>().AddMessage("AI has no target", Color.red);
+                if (Time.time > lastSearchTime + TIME_BETWEEN_SEARCHES)
                 {
-                    target = ships[0].transform;
-                    GameObject.FindObjectOfType<MessageController>().AddMessage("AI found target", Color.green);
+                    lastSearchTime = Time.time;
+                    var ships = GameObject.FindObjectsOfType<SpacecraftController>()
+                        .Where(s => s != this && s.faction != this.faction && s.faction!="Rebel" && s.isActiveAndEnabled)
+                        .OrderBy(s => (s.transform.position - transform.position).magnitude).ToArray();
+                    if (ships.Length > 0)
+                    {
+                        target = ships[0].transform;
+                        //GameObject.FindObjectOfType<MessageController>().AddMessage("AI found target", Color.green);
+                    }
                 }
             }
         }

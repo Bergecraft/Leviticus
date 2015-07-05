@@ -24,27 +24,27 @@ public class AmmoBehaviour : SpriteBehaviour<AmmoDef>
         Destroy(this.gameObject, def.lifetime);
 	}
 
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        DetectCollision(other.collider);
-    }
+    //void OnCollisionEnter2D(Collision2D other)
+    //{
+    //    DetectCollision(other.collider);
+    //}
     void OnTriggerEnter2D(Collider2D other)
     {
         DetectCollision(other);
     }
     void DetectCollision(Collider2D other)
     {
-        if (other.gameObject.layer == 8)
-        {
-            Physics2D.IgnoreCollision(other, this.GetComponent<Collider2D>());
-        }
+        //if (other.gameObject.layer == 8)
+        //{
+        //    Physics2D.IgnoreCollision(other, this.GetComponent<Collider2D>());
+        //}
 
         var otherShip = other.gameObject.GetComponent<SpacecraftController>();
         if (otherShip != null)
         {
-            if (otherShip == source)
+            if (otherShip.faction == source.faction)
             {
-                Physics2D.IgnoreCollision(other, this.GetComponent<Collider2D>());
+                //Physics2D.IgnoreCollision(other, this.GetComponent<Collider2D>());
             }
             else
             {

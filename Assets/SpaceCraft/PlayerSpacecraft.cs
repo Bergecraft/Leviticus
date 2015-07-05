@@ -43,7 +43,7 @@ public class PlayerSpacecraft : SpacecraftController
     {
         if (Input.GetKey(KeyCode.W))
         {
-            ActiveThrusters();
+            ActivateThrusters();
         }
         else
         {
