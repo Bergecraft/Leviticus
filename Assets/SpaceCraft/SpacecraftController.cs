@@ -23,6 +23,7 @@ public class SpacecraftController : MonoBehaviour {
     private float health;
     private float shield;
     public float MAX_SHIELD = 20;
+    public float SHIELD_REGEN = 3;
     public float MAX_HEALTH = 100;
 
     public string faction;
@@ -100,7 +101,7 @@ public class SpacecraftController : MonoBehaviour {
         velocity = GetComponent<Rigidbody2D>().velocity.magnitude;
         status.transform.position = transform.position;
         status.UpdateHealth(health / MAX_HEALTH);
-        shield = Mathf.Clamp(shield + 1 * Time.deltaTime, 0, MAX_SHIELD);
+        shield = Mathf.Clamp(shield + SHIELD_REGEN * Time.deltaTime, 0, MAX_SHIELD);
         status.UpdateShield(shield / MAX_SHIELD);
 	}
     public virtual void FixedUpdate()

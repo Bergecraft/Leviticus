@@ -38,7 +38,8 @@ public class WeaponBehaviour : SpriteBehaviour<WeaponDef>
                 lastFire = Time.time;
                 var bullet = Instantiate(ammoPrefab);
                 //bullet.source = transform.GetComponentInParent<SpacecraftController>();
-                bullet.transform.position = transform.position;
+                bullet.transform.position = transform.TransformPoint(def.barrelOffset);
+                //bullet.transform.position = transform.position;
                 bullet.transform.rotation = transform.rotation;
                 var zRotation = 180 * (1 - def.accuracy * ammodef.accuracy) * (-0.5f + Random.value);
                 bullet.transform.Rotate(0, 0, zRotation);

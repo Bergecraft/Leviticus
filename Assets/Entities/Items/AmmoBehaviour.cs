@@ -66,7 +66,9 @@ public class AmmoBehaviour : SpriteBehaviour<AmmoDef>
         //Ammo Script
         var ammo = ammoPrefab.AddComponent<AmmoBehaviour>();
         ammo.def = ammodef;
-
+        var sourceColor = source.GetComponent<SpriteRenderer>().color;
+        var primaryColor = Primary(sourceColor);
+        ammo.def.spriteColor = primaryColor;
         ammo.BuildSprite();
 
         ammo.source = source;
@@ -79,5 +81,32 @@ public class AmmoBehaviour : SpriteBehaviour<AmmoDef>
         rigidbody.mass = ammodef.mass;
 
         return ammoPrefab;
+    }
+    static Color Saturate(Color color, float saturation)
+    {
+        return Color.white/2 + color / saturation;
+
+
+        //var L = 0.3f * color.r + 0.6f * color.g + 0.1f * color.b;
+        //var new_r = color.r + saturation * (L - color.r);
+        //var new_g = color.g + saturation * (L - color.g);
+        //var new_b = color.b + saturation * (L - color.b);
+        //return new Color(new_r, new_g, new_b);
+    }
+    static Color Primary(Color color)
+    {
+        if (color.r == color.maxColorComponent)
+        {
+            return new Color(1, color.g, color.b);
+        }
+        else if (color.g == color.maxColorComponent)
+        {
+            return new Color(color.r, 1, color.b);
+        }
+        else if (color.b == color.maxColorComponent)
+        {
+            return new Color(color.r, color.g, 1);
+        }
+        return color;
     }
 }

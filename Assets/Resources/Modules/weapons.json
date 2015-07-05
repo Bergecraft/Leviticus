@@ -8,6 +8,7 @@
 		 "mass":50,
 		 "hardpointSize":6,
 		 "ammoSize":6,
+		 "barrelOffset": {"x":0,"y":0.3,"z":0},
 		 "hardpoints":[],
 		 "force":100,
 		 "accuracy":0.8,
@@ -21,6 +22,7 @@
 		 "mass":100,
 		 "hardpointSize":6,
 		 "ammoSize":6,
+		 "barrelOffset": {"x":0,"y":0.3,"z":0},
 		 "hardpoints":[],
 		 "force":200,
 		 "accuracy":0.9,
@@ -34,9 +36,10 @@
 		 "mass":250,
 		 "hardpointSize":8,
 		 "ammoSize":6,
+		 "barrelOffset": {"x":0,"y":0.3,"z":0},
 		 "hardpoints":[],
 		 "force":300,
-		 "accuracy":0.95,
+		 "accuracy":0.7,
 		 "validAmmoType":"hybrid"}
 	],
 	"ammoDefs":[
