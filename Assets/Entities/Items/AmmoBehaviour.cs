@@ -95,7 +95,11 @@ public class AmmoBehaviour : SpriteBehaviour<AmmoDef>
     }
     static Color Primary(Color color)
     {
-        if (color.r == color.maxColorComponent)
+        if (color.r == color.g && color.r == color.b)
+        {
+            return Color.white;
+        }
+        else if (color.r == color.maxColorComponent)
         {
             return new Color(1, color.g, color.b);
         }
