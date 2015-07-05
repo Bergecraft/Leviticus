@@ -15,7 +15,7 @@ namespace Assets.SpaceCraft
             if (target != null)
             {
                 if (targetPosition != null && (target.position - transform.position).magnitude>8)
-                    RotateTowards(targetPosition);
+                    TorqueTowards(targetPosition);
             }
         }
         public override void Update()
@@ -30,13 +30,22 @@ namespace Assets.SpaceCraft
                 var bulletTravelTimeToTarget = distance.magnitude / ammoVelocity;
                 var projectedOffset = target.GetComponent<Rigidbody2D>().velocity * bulletTravelTimeToTarget;
                 targetPosition = target.position + new Vector3(projectedOffset.x, projectedOffset.y, 0);
+                turretTarget = targetPosition;
                 projectedOffset = targetPosition - transform.position;
 
-                var dot = Vector2.Dot(projectedOffset.normalized, transform.up);
-                if (dot > 0.90f)
+                foreach (var blaster in blasters)
                 {
-                    FirePrimary();
+                    var blastdot = Vector2.Dot(projectedOffset.normalized, blaster.transform.up);
+                    if (blastdot > 0.90f)
+                    {
+                        blaster.Fire();
+                    }
                 }
+                var dot = Vector2.Dot(projectedOffset.normalized, transform.up);
+                //if (dot > 0.90f)
+                //{
+                //    FirePrimary();
+                //}
                 if (dot > 0.6f || distance.magnitude < 8 )
                 {
                     ActiveThrusters();

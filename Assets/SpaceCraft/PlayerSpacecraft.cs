@@ -5,6 +5,9 @@ public class PlayerSpacecraft : SpacecraftController
 {
     public bool autoRotate = true;
     public bool reverse = false;
+    public enum ControlMode { MouseFollow, Keyboard };
+    public ControlMode controlMode = ControlMode.MouseFollow;
+    Transform target;
     public override void Update()
     {
         base.Update();
@@ -18,6 +21,8 @@ public class PlayerSpacecraft : SpacecraftController
         {
             autoRotate = !autoRotate;
         }
+
+        turretTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
     public override void FixedUpdate()
     {
@@ -25,12 +30,12 @@ public class PlayerSpacecraft : SpacecraftController
         if (reverse)
         {
             var target = GetComponent<Rigidbody2D>().position - GetComponent<Rigidbody2D>().velocity;
-            RotateTowards(target);
+            TorqueTowards(target);
         }
         else if (autoRotate)
         {
             var target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RotateTowards(target);
+            TorqueTowards(target);
         }
     }
 

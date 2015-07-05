@@ -36,6 +36,12 @@ namespace Assets
     {
 
     }
+    [CustomEditor(typeof(TurretBehaviour))]
+    [CanEditMultipleObjects]
+    public class TurretEditor : DynamicChoiceEditor<ModuleDef>
+    {
+
+    }
     //[CustomEditor(typeof(DefinitionBehaviour<WeaponDef>))]
     //public class WeaponEditor : DynamicChoiceEditor
     //{

@@ -29,6 +29,7 @@ namespace Assets.Entities.Modules
                         var hpgo = new GameObject(hpdef.name);
                         hpgo.transform.parent = hpsTrans;
                         hpgo.transform.localPosition = Vector3.zero;
+                        hpgo.AddComponent<SpriteRenderer>().sortingOrder = 1;
                         var hp = hpgo.AddComponent<Hardpoint>();
                         hp.size = hpdef.size;
                         hp.type = hpdef.type;

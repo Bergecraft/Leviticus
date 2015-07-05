@@ -27,6 +27,7 @@ public class SpacecraftController : MonoBehaviour {
 
     public string faction;
 
+    public Vector3 turretTarget;
     [Header("Debug")]
     public float velocity;
 
@@ -120,11 +121,11 @@ public class SpacecraftController : MonoBehaviour {
             GetComponent<Rigidbody2D>().AddForceAtPosition(thruster.ThrustVector * throttle, thruster.position2d);
         }
     }
-    protected void RotateTowards(Vector2 target)
+    protected void TorqueTowards(Vector2 target)
     {
-        RotateTowards(new Vector3(target.x, target.y, 0));
+        TorqueTowards(new Vector3(target.x, target.y, 0));
     }
-    protected void RotateTowards(Vector3 target)
+    protected void TorqueTowards(Vector3 target)
     {
         target.z = 0;
         var targetRotation = (target - transform.position).normalized;
