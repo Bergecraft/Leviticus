@@ -43,7 +43,21 @@ public class SpacecraftController : MonoBehaviour {
         status = Instantiate(Resources.Load<StatusBar>("Status"));
         health = MAX_HEALTH;
         shield = MAX_SHIELD;
+
+        CreateIcon();
 	}
+
+    private void CreateIcon()
+    {
+        var icon = new GameObject("icon");
+        icon.transform.parent = transform;
+        icon.transform.localPosition = Vector3.zero;
+        icon.transform.localScale = Vector3.one *3;
+        icon.layer = 10;
+        var sr = icon.AddComponent<SpriteRenderer>();
+        sr.color = GetComponent<SpriteRenderer>().color;
+        sr.sprite = Resources.Load<Sprite>("Spacecraft/Icons_xcf-TriangleIcon");
+    }
     public void FirePrimary()
     {
         foreach (var blaster in blasters)

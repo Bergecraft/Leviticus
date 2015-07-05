@@ -2213,10 +2213,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17bcc2333e2c30647b3a157551bd7f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DRAG_COEFF: 160
-  MAX_SHIELD: 150
-  SHIELD_REGEN: 8
-  MAX_HEALTH: 800
+  DRAG_COEFF: 100
+  MAX_SHIELD: 500
+  SHIELD_REGEN: 30
+  MAX_HEALTH: 2400
   faction: dread
   turretTarget: {x: 0, y: 0, z: 0}
   velocity: 0

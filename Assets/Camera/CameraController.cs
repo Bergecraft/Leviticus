@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour {
 	// Use this for initialization
     public Transform target;
 	void Start () {
-	
+	    
 	}
 	
 	// Update is called once per frame
