@@ -33,6 +33,8 @@ public class SpacecraftController : MonoBehaviour {
     public float velocity;
 
     StatusBar status;
+
+    SpacecraftManager manager;
 	// Use this for initialization
 	void Start () {
         mainThrusters = transform.GetComponentsInChildren<MainThrusterBehaviour>();
@@ -45,6 +47,9 @@ public class SpacecraftController : MonoBehaviour {
         shield = MAX_SHIELD;
 
         CreateIcon();
+
+        manager = GameObject.FindObjectOfType<SpacecraftManager>();
+        manager.Add(this);
 	}
 
     private void CreateIcon()
@@ -167,6 +172,10 @@ public class SpacecraftController : MonoBehaviour {
         //var json = JsonConvert.SerializeObject(transform);
         return json;
         //File.WriteAllText(fileName, json);
+    }
+    public void OnDestroy()
+    {
+        manager.Remove(this);
     }
 }
 

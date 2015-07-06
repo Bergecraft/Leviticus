@@ -39,7 +39,7 @@
 		 "barrelOffset": {"x":0,"y":0.3,"z":0},
 		 "hardpoints":[],
 		 "force":300,
-		 "accuracy":0.7,
+		 "accuracy":0.95,
 		 "validAmmoType":"hybrid"}
 	],
 	"ammoDefs":[
