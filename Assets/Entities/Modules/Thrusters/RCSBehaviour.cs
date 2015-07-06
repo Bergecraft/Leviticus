@@ -37,7 +37,7 @@ namespace Assets.Entities.Modules.Thrusters
             {
                 var color = Color.white;
                 var dot = Vector3.Dot(perp, -exhaust.transform.right);
-                color.a = Mathf.Max(dot,0);// *Mathf.Abs(torque) * 1000;
+                color.a = Mathf.Max(dot,0) * Mathf.Abs(torque)/(2*def.thrust);// *Mathf.Abs(torque) * 1000;
                 exhaust.GetComponent<SpriteRenderer>().color = color;
             }
         }
