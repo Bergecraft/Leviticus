@@ -17,9 +17,11 @@ public class WeaponBehaviour : SpriteBehaviour<WeaponDef>
     //public WeaponDef def;
     public AmmoDef ammodef;
     GameObject ammoPrefab;
+    SpacecraftController parent;
 	// Use this for initialization
 	void Start () {
         base.Start();
+        parent = transform.GetComponentInParent<SpacecraftController>();
         if (def != null)
         {
             buildAmmo();
@@ -48,6 +50,8 @@ public class WeaponBehaviour : SpriteBehaviour<WeaponDef>
                 bullet.SetActive(true);
                 //bullet.GetComponent<Rigidbody2D>().velocity = MUZZLE_VELOCITY * transform.up;
                 bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * def.force, ForceMode2D.Impulse);
+
+                parent.GetComponent<Rigidbody2D>().AddForceAtPosition(-bullet.transform.up * def.force, transform.position, ForceMode2D.Impulse);
             }
         }
         
@@ -55,6 +59,6 @@ public class WeaponBehaviour : SpriteBehaviour<WeaponDef>
     private void buildAmmo()
     {
         ammodef = DefinitionManager.GetAllDefinitions<AmmoDef>().Where(a => a.definitionType.StartsWith(def.validAmmoType) && a.size == def.ammoSize).First();
-        ammoPrefab = AmmoBehaviour.BuildAmmo(transform.GetComponentInParent<SpacecraftController>(), ammodef);
+        ammoPrefab = AmmoBehaviour.BuildAmmo(parent, ammodef);
     }
 }

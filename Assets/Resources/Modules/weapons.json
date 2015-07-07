@@ -40,7 +40,21 @@
 		 "hardpoints":[],
 		 "force":300,
 		 "accuracy":0.95,
-		 "validAmmoType":"hybrid"}
+		 "validAmmoType":"hybrid"},
+
+		{"definitionType":"rail/large rail",
+		 "spritePath":"modules/HardpointsXL_xcf-Large_Rail__24px_",
+		 "spriteColor": {"r":0.3,"g":0.3,"b":0.3,"a":1},
+		 "energyCost":15,
+		 "cooldown":1.0,
+		 "mass":3000,
+		 "hardpointSize":24,
+		 "ammoSize":24,
+		 "barrelOffset": {"x":0,"y":2,"z":0},
+		 "hardpoints":[],
+		 "force":5000,
+		 "accuracy":0.99,
+		 "validAmmoType":"slug"}
 	],
 	"ammoDefs":[
 		{"definitionType":"hybrid/small_hybrid",
@@ -52,6 +66,17 @@
 		 "explosiveForce":100,
 		 "mass":10,
 		 "lifetime": 1,
+		 "accuracy":1.0},
+		 
+		{"definitionType":"slug/large_slug",
+		 "spritePath":"modules/HardpointsXL_xcf-Slug__24px_",
+		 "spriteColor": {"r":0.6,"g":0.6,"b":0.6,"a":1},
+		 "size":24,
+		 "damageVelocityScalar":1.0,
+		 "bonusDamage":0,
+		 "explosiveForce":0,
+		 "mass":150,
+		 "lifetime": 3,
 		 "accuracy":1.0}
 	],
 	"thrusterDefs":[
@@ -108,6 +133,19 @@
 			"name":"left",
 			"size":6,
 			"position":{"x":-0.08,"y":0,"z":0},
+			"scale":{"x":1,"y":1,"z":1}
+			}
+		 ]
+		},
+		{"definitionType":"Turret/Large Single Turret",
+		 "spritePath":"modules/Hardpoints_xcf-Turret_Mount__32px_",
+		 "spriteColor": {"r":0.7,"g":0.7,"b":0.7,"a":1},
+		 "hardpointSize":32,
+		 "hardpoints":[
+			{
+			"name":"center",
+			"size":24,
+			"position":{"x":0,"y":0,"z":0},
 			"scale":{"x":1,"y":1,"z":1}
 			}
 		 ]
