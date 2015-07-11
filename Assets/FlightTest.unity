@@ -27497,7 +27497,7 @@ Transform:
   - {fileID: 457442998}
   - {fileID: 1661439963}
   m_Father: {fileID: 2105243746}
-  m_RootOrder: 4
+  m_RootOrder: 2
 --- !u!1 &842405339
 GameObject:
   m_ObjectHideFlags: 0
@@ -31597,6 +31597,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1 &992464302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 992464303}
+  m_Layer: 0
+  m_Name: Grey
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &992464303
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 992464302}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 741363260}
+  - {fileID: 844993027}
+  m_Father: {fileID: 2105243746}
+  m_RootOrder: 0
 --- !u!1 &998255067
 GameObject:
   m_ObjectHideFlags: 1
@@ -33786,7 +33815,7 @@ Transform:
   - {fileID: 292057638}
   - {fileID: 51973755}
   m_Father: {fileID: 2105243746}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!1 &1071169550
 GameObject:
   m_ObjectHideFlags: 1
@@ -38015,7 +38044,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2105243746}
+    m_TransformParent: {fileID: 1764584219}
     m_Modifications:
     - target: {fileID: 420800, guid: 7c5254cdddf5fc742922315895817c3d, type: 2}
       propertyPath: m_LocalPosition.x
@@ -38047,11 +38076,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 420800, guid: 7c5254cdddf5fc742922315895817c3d, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11494308, guid: 7c5254cdddf5fc742922315895817c3d, type: 2}
       propertyPath: DRAG_COEFF
-      value: 600
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 21205048, guid: 7c5254cdddf5fc742922315895817c3d, type: 2}
       propertyPath: m_Sprite
@@ -38174,11 +38203,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11494308, guid: 7c5254cdddf5fc742922315895817c3d, type: 2}
       propertyPath: MAX_HEALTH
-      value: 1800
+      value: 2400
       objectReference: {fileID: 0}
     - target: {fileID: 11494308, guid: 7c5254cdddf5fc742922315895817c3d, type: 2}
       propertyPath: MAX_SHIELD
-      value: 300
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 21272476, guid: 7c5254cdddf5fc742922315895817c3d, type: 2}
+      propertyPath: m_Color.r
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 21272476, guid: 7c5254cdddf5fc742922315895817c3d, type: 2}
+      propertyPath: m_Color.g
+      value: .423529416
+      objectReference: {fileID: 0}
+    - target: {fileID: 21272476, guid: 7c5254cdddf5fc742922315895817c3d, type: 2}
+      propertyPath: m_Color.b
+      value: .513725519
+      objectReference: {fileID: 0}
+    - target: {fileID: 130444, guid: 7c5254cdddf5fc742922315895817c3d, type: 2}
+      propertyPath: m_Name
+      value: '[AI](Blue)Dread Carrier'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7c5254cdddf5fc742922315895817c3d, type: 2}
@@ -51424,7 +51469,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2105243746}
+    m_TransformParent: {fileID: 992464303}
     m_Modifications:
     - target: {fileID: 483894, guid: e25f6c7a7e4c9cf4ba7833a5b9ef12af, type: 2}
       propertyPath: m_LocalPosition.x
@@ -51456,11 +51501,39 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 483894, guid: e25f6c7a7e4c9cf4ba7833a5b9ef12af, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 112162, guid: e25f6c7a7e4c9cf4ba7833a5b9ef12af, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 112162, guid: e25f6c7a7e4c9cf4ba7833a5b9ef12af, type: 2}
+      propertyPath: m_Name
+      value: '[Player](Grey)Light Civilian - Rail'
+      objectReference: {fileID: 0}
+    - target: {fileID: 21278686, guid: e25f6c7a7e4c9cf4ba7833a5b9ef12af, type: 2}
+      propertyPath: m_Color.r
+      value: .501960814
+      objectReference: {fileID: 0}
+    - target: {fileID: 21278686, guid: e25f6c7a7e4c9cf4ba7833a5b9ef12af, type: 2}
+      propertyPath: m_Color.g
+      value: .501960814
+      objectReference: {fileID: 0}
+    - target: {fileID: 21278686, guid: e25f6c7a7e4c9cf4ba7833a5b9ef12af, type: 2}
+      propertyPath: m_Color.b
+      value: .501960814
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464010, guid: e25f6c7a7e4c9cf4ba7833a5b9ef12af, type: 2}
+      propertyPath: MAX_HEALTH
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464010, guid: e25f6c7a7e4c9cf4ba7833a5b9ef12af, type: 2}
+      propertyPath: SHIELD_REGEN
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11464010, guid: e25f6c7a7e4c9cf4ba7833a5b9ef12af, type: 2}
+      propertyPath: MAX_SHIELD
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e25f6c7a7e4c9cf4ba7833a5b9ef12af, type: 2}
@@ -54463,6 +54536,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1 &1764584218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1764584219}
+  m_Layer: 0
+  m_Name: Blue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1764584219
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1764584218}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 212717078}
+  m_Father: {fileID: 2105243746}
+  m_RootOrder: 3
 --- !u!1 &1770767883
 GameObject:
   m_ObjectHideFlags: 1
@@ -55827,15 +55928,15 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2105243746}
+    m_TransformParent: {fileID: 992464303}
     m_Modifications:
     - target: {fileID: 419158, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.76000023
+      value: 1.60000002
       objectReference: {fileID: 0}
     - target: {fileID: 419158, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -19.0599995
+      value: -10.21
       objectReference: {fileID: 0}
     - target: {fileID: 419158, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
       propertyPath: m_LocalPosition.z
@@ -55859,11 +55960,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 419158, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11430394, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
       propertyPath: SHIELD_REGEN
-      value: 2000
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 21286292, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
       propertyPath: m_Sprite
@@ -55884,11 +55985,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11430394, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
       propertyPath: MAX_SHIELD
-      value: 2000
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 11430394, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
       propertyPath: DRAG_COEFF
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5008048, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
       propertyPath: m_AngularDrag
@@ -55900,11 +56001,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 180644, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
       propertyPath: m_Name
-      value: '[Player](Blue)Light Civilian - Autocannon'
+      value: '[Player](Grey)Light Civilian - Autocannon'
       objectReference: {fileID: 0}
     - target: {fileID: 180644, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 21241216, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
+      propertyPath: m_Color.r
+      value: .501960814
+      objectReference: {fileID: 0}
+    - target: {fileID: 21241216, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
+      propertyPath: m_Color.g
+      value: .501960814
+      objectReference: {fileID: 0}
+    - target: {fileID: 21241216, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
+      propertyPath: m_Color.b
+      value: .501960814
+      objectReference: {fileID: 0}
+    - target: {fileID: 11430394, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
+      propertyPath: MAX_HEALTH
+      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f43cc2f0723f7a2438067948830638ba, type: 2}
@@ -63340,11 +63457,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 844993027}
-  - {fileID: 212717078}
-  - {fileID: 741363260}
+  - {fileID: 992464303}
   - {fileID: 1067434130}
   - {fileID: 836547808}
+  - {fileID: 1764584219}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!1 &2110379512

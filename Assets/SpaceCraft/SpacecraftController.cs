@@ -20,8 +20,8 @@ public class SpacecraftController : MonoBehaviour {
     protected RCSBehaviour[] rcs;
     protected float throttle = 1.0f;
 
-    private float health;
-    private float shield;
+    protected float health;
+    protected float shield;
     public float MAX_SHIELD = 20;
     public float SHIELD_REGEN = 3;
     public float MAX_HEALTH = 100;

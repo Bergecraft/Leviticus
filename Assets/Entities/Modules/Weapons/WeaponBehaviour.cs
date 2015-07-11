@@ -49,6 +49,7 @@ public class WeaponBehaviour : SpriteBehaviour<WeaponDef>
                 bullet.GetComponent<AmmoBehaviour>().def = ammodef;
                 bullet.SetActive(true);
                 //bullet.GetComponent<Rigidbody2D>().velocity = MUZZLE_VELOCITY * transform.up;
+                bullet.GetComponent<Rigidbody2D>().velocity = parent.GetComponent<Rigidbody2D>().velocity;
                 bullet.GetComponent<Rigidbody2D>().AddForce(bullet.transform.up * def.force, ForceMode2D.Impulse);
 
                 parent.GetComponent<Rigidbody2D>().AddForceAtPosition(-bullet.transform.up * def.force, transform.position, ForceMode2D.Impulse);

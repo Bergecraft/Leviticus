@@ -6,6 +6,7 @@ using Assets;
 using Assets.Serialization;
 using System.IO;
 using System.Linq;
+using Assets.SpaceCraft;
 
 namespace UnityVS.Leviticus.CSharp.Test
 {
@@ -89,6 +90,57 @@ namespace UnityVS.Leviticus.CSharp.Test
             {
                 return Vector3.Cross(position, Vector3.forward).normalized;
             }
+        }
+        [TestMethod]
+        public void CalculateTimeToTargetTest1()
+        {
+            var p = Vector2.zero;
+            var pt = Vector2.one * 10;
+            var v = Vector2.zero;
+            var vt = Vector2.zero;
+            var vamag = Mathf.Sqrt(2);
+
+            var expected_va = Vector2.one;
+            var expected_t = 10;
+
+            CalculateTimeToTarget(p, pt, v, vt, vamag, expected_t, expected_va);
+        }
+        [TestMethod]
+        public void CalculateTimeToTargetTest2()
+        {
+            var p = Vector2.zero;
+            var pt = Vector2.one * 10;
+            var v = Vector2.right;
+            var vt = Vector2.down;
+            var vamag = 1.0f;
+
+            var expected_va = Vector2.one.normalized;
+            var expected_t = 5.858f;
+
+            CalculateTimeToTarget(p, pt, v, vt, vamag, expected_t, expected_va);
+        }
+        [TestMethod]
+        public void CalculateTimeToTargetTest3()
+        {
+            var p = Vector2.zero;
+            var pt = Vector2.up * 10;
+            var v = Vector2.up*2;
+            var vt = Vector2.right*2;
+            var vamag = 4.0f;
+
+            var expected_va = new Vector2(2,3.463f);
+            var expected_t = 5;
+
+            CalculateTimeToTarget(p, pt, v, vt, vamag, expected_t, expected_va);
+        }
+        private static void CalculateTimeToTarget(Vector2 p, Vector2 pt, Vector2 v, Vector2 vt, float vamag, float expected_t, Vector2 expected_va)
+        {
+            Vector2 va;
+            var t = AiSpacecraft.CalculateTimeToTarget(p, pt, v, vt, vamag, (pt-p).magnitude/vamag, out va);
+            
+            Assert.AreEqual(expected_va.x, va.x, 0.001f, String.Format("Expected: ({0},{1}), Actual: ({2},{3})",expected_va.x, expected_va.y, va.x, va.y));
+            Assert.AreEqual(expected_va.y, va.y, 0.001f, String.Format("Expected: ({0},{1}), Actual: ({2},{3})", expected_va.x, expected_va.y, va.x, va.y));
+            Assert.AreEqual(expected_t, t, 0.001f);
         }
     }
 }

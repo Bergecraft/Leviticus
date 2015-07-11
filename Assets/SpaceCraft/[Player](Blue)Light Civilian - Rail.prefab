@@ -837,7 +837,7 @@ MonoBehaviour:
   faction: Rebel
   turretTarget: {x: 0, y: 0, z: 0}
   velocity: 0
-  autoRotate: 1
+  godMode: 0
   reverse: 0
   controlMode: 0
 --- !u!114 &11464804
