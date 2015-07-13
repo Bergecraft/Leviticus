@@ -29,5 +29,8 @@ namespace Assets.Entities.Modules
         [JsonProperty(DefaultValueHandling=DefaultValueHandling.Ignore)]
         [DefaultValue(typeof(Vector3),"1,1,1")]
         public Vector3 scale { get; set; }
+
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public HardpointDef[] Hardpoints { get; set; }
     }
 }

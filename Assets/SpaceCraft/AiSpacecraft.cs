@@ -4,34 +4,39 @@ using System.Linq;
 
 namespace Assets.SpaceCraft
 {
-    public class AiSpacecraft : SpacecraftController
+    public class AiSpacecraft : MonoBehaviour
     {
         private string[] neutralFactions = new string[]{/*"Rebel"*/};
-        public Transform target;
-        public Vector3 targetPosition;
+        protected Transform target;
+        protected Vector3 targetPosition;
         private float ttt;
-        public override void FixedUpdate()
+        SpacecraftController spacecraft;
+        void Start()
         {
-            base.FixedUpdate();
+            spacecraft = GetComponent<SpacecraftController>();
+        }
+        public void FixedUpdate()
+        {
+            //base.FixedUpdate();
 
             if (target != null)
             {
                 if (targetPosition != null && (target.position - transform.position).magnitude>4)
-                    TorqueTowards(targetPosition);
+                    spacecraft.TorqueTowards(targetPosition);
             }
         }
         float lastSearchTime = 0;
         const float TIME_BETWEEN_SEARCHES = 0.5f;
-        public override void Update()
+        public void Update()
         {
-            base.Update();
+            //base.Update();
 
             if (target != null && target.gameObject.activeInHierarchy)
             {
                 //var distance = target.position - transform.position;
 
 
-                var vamag = blasters[0].def.force / blasters[0].ammodef.mass; // TODO: Check this
+                var vamag = spacecraft.blasters[0].AmmoVelocity; // TODO: Check this
                 var vt = target.GetComponent<Rigidbody2D>().velocity;
                 var v = GetComponent<Rigidbody2D>().velocity;
                 var pt = new Vector2(target.position.x, target.position.y);
@@ -54,13 +59,14 @@ namespace Assets.SpaceCraft
                 //var bulletTravelTimeToTarget = distance.magnitude / ammoVelocity;
                 //var projectedOffset = (target.GetComponent<Rigidbody2D>().velocity - GetComponent<Rigidbody2D>().velocity) * bulletTravelTimeToTarget;
                 targetPosition = pt + vt * t; //target.position + new Vector3(pp.x, pp.y, 0);
-                turretTarget = pt + vt * t - v * t; //targetPosition;
+                Vector3 turretTarget = pt + vt * t - v * t;
+                spacecraft.turretTarget = turretTarget; //targetPosition;
                 //pp = targetPosition - transform.position;
 
-                var o = turretTarget - new Vector3(p.x,p.y,0);
+                var o = turretTarget - new Vector3(p.x, p.y, 0);
                 var o_norm = o.normalized;
 
-                foreach (var blaster in blasters)
+                foreach (var blaster in spacecraft.blasters)
                 {
                     var blastdot = Vector2.Dot(o_norm, blaster.transform.up);
                     if (blastdot > 0.90f)
@@ -78,23 +84,23 @@ namespace Assets.SpaceCraft
 
                 if (dot > 0.9f || o.magnitude < 4)
                 {
-                    ActivateThrusters();
+                    spacecraft.ActivateThrusters();
                 }
                 else
                 {
-                    DeactivateThrusters();
+                    spacecraft.DeactivateThrusters();
                 }
             }
             else
             {
-                DeactivateThrusters();
+                spacecraft.DeactivateThrusters();
 
                 //GameObject.FindObjectOfType<MessageController>().AddMessage("AI has no target", Color.red);
                 if (Time.time > lastSearchTime + TIME_BETWEEN_SEARCHES)
                 {
                     lastSearchTime = Time.time;
                     var ships = GameObject.FindObjectsOfType<SpacecraftController>()
-                        .Where(s => s != this && s.faction != this.faction && !neutralFactions.Contains(s.faction) && s.isActiveAndEnabled)
+                        .Where(s => s != this && s.faction != spacecraft.faction && !neutralFactions.Contains(s.faction) && s.isActiveAndEnabled)
                         .OrderBy(s => (s.transform.position - transform.position).magnitude).ToArray();
                     if (ships.Length > 0)
                     {

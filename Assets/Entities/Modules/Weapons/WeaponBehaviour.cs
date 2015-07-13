@@ -27,7 +27,14 @@ public class WeaponBehaviour : SpriteBehaviour<WeaponDef>
             buildAmmo();
         }
 	}
-	
+
+    public float AmmoVelocity
+    {
+        get
+        {
+            return def.force / ammodef.mass;
+        }
+    }
 	// Update is called once per frame
 	void Update () {
 	}

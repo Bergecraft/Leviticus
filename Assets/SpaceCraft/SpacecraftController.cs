@@ -8,6 +8,7 @@ using DG.Tweening;
 using Assets.Entities.Modules.Thrusters;
 using System.Linq;
 using Assets.SpaceCraft;
+using Assets.Entities.Modules.Shields;
 
 public class SpacecraftController : MonoBehaviour {
 
@@ -15,22 +16,25 @@ public class SpacecraftController : MonoBehaviour {
     protected float MANEUVERING_THRUST = 1000;
     public float DRAG_COEFF = 1.0f;
 
+    [HideInInspector]
     protected MainThrusterBehaviour[] mainThrusters;
-    protected WeaponBehaviour[] blasters;
+    [HideInInspector]
+    public WeaponBehaviour[] blasters;
+    [HideInInspector]
     protected RCSBehaviour[] rcs;
+    [HideInInspector]
+    public ShieldBehaviour shield {get;set;}
     protected float throttle = 1.0f;
 
-    protected float health;
-    protected float shield;
-    public float MAX_SHIELD = 20;
-    public float SHIELD_REGEN = 3;
+    private float health;
+    //private float shield;
+    //public float MAX_SHIELD = 20;
+    //public float SHIELD_REGEN = 3;
     public float MAX_HEALTH = 100;
-
     public string faction;
-
-    public Vector3 turretTarget;
-    [Header("Debug")]
-    public float velocity;
+    [HideInInspector]
+    public Vector3 turretTarget{get;set;}
+    private float velocity;
 
     StatusBar status;
 
@@ -40,11 +44,12 @@ public class SpacecraftController : MonoBehaviour {
         mainThrusters = transform.GetComponentsInChildren<MainThrusterBehaviour>();
         blasters = transform.GetComponentsInChildren<WeaponBehaviour>();
         rcs = transform.GetComponentsInChildren<RCSBehaviour>();
+        shield = transform.GetComponentInChildren<ShieldBehaviour>();
         ROTATE_SPEED = rcs.Select(r => r.transform.position.magnitude * r.def.thrust).Aggregate((sum, r) => sum + r);
         MANEUVERING_THRUST = rcs.Select(r => r.def.thrust).Aggregate((sum, r) => sum + r);
         status = Instantiate(Resources.Load<StatusBar>("Status"));
         health = MAX_HEALTH;
-        shield = MAX_SHIELD;
+        //shield = MAX_SHIELD;
 
         CreateIcon();
 
@@ -86,8 +91,7 @@ public class SpacecraftController : MonoBehaviour {
     }
     public void Damage(float damage)
     {
-        var overflow = -Mathf.Min(shield - damage, 0);
-        shield = Mathf.Clamp(shield - damage, 0, MAX_SHIELD);
+        var overflow = shield.Damage(damage);
         health = Mathf.Clamp(health - overflow, 0, MAX_HEALTH);
         //GameObject.FindObjectOfType<MessageController>().AddMessage(damage.ToString("n2") + " damage");
                 
@@ -120,8 +124,7 @@ public class SpacecraftController : MonoBehaviour {
         velocity = GetComponent<Rigidbody2D>().velocity.magnitude;
         status.transform.position = transform.position;
         status.UpdateHealth(health / MAX_HEALTH);
-        shield = Mathf.Clamp(shield + SHIELD_REGEN * Time.deltaTime, 0, MAX_SHIELD);
-        status.UpdateShield(shield / MAX_SHIELD);
+        status.UpdateShield(shield.ShieldPercentage);
 	}
     public virtual void FixedUpdate()
     {
@@ -141,7 +144,7 @@ public class SpacecraftController : MonoBehaviour {
             GetComponent<Rigidbody2D>().AddForceAtPosition(thruster.ThrustVector * throttle, thruster.position2d);
         }
     }
-    protected void TorqueTowards(Vector2 target)
+    public void TorqueTowards(Vector2 target)
     {
         TorqueTowards(new Vector3(target.x, target.y, 0));
     }
@@ -164,6 +167,10 @@ public class SpacecraftController : MonoBehaviour {
             r.updateExhausts(torque);
         }
     }
+    public void StrafeTowardsRelative(Vector2 direction)
+    {
+        GetComponent<Rigidbody2D>().AddRelativeForce(direction * MANEUVERING_THRUST);
+    }
 
     public string ToJson()
     {
@@ -176,6 +183,10 @@ public class SpacecraftController : MonoBehaviour {
     public void OnDestroy()
     {
         manager.Remove(this);
+    }
+    public void SetHealth(float value)
+    {
+        health = Mathf.Clamp(value, 0, MAX_HEALTH);
     }
 }
 

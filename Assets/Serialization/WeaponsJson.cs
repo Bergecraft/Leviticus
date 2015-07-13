@@ -2,6 +2,7 @@
 using Assets.Entities.Modules;
 using Assets.Entities.Modules.Thrusters;
 using Assets.Entities.Modules.Weapons;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Assets.Serialization
         public WeaponDef[] weaponDefs;
         public AmmoDef[] ammoDefs;
         public ThrusterDef[] thrusterDefs;
+        [JsonProperty, JsonConverter(typeof(ModuleDefConverter))]
         public ModuleDef[] moduleDefs;
     }
 }

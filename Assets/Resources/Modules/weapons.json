@@ -118,37 +118,61 @@
 		}
 	],
 	"moduleDefs":[
-		{"definitionType":"Turret/Double Auto Turret",
-		 "spritePath":"modules/Hardpoints_xcf-Turret_Mount__16px_",
-		 "spriteColor": {"r":0.7,"g":0.7,"b":0.7,"a":1},
-		 "hardpointSize":16,
-		 "hardpoints":[
-			{
-			"name":"right",
-			"size":6,
-			"position":{"x":0.08,"y":0,"z":0},
-			"scale":{"x":1,"y":1,"z":1}
-			},
-			{
-			"name":"left",
-			"size":6,
-			"position":{"x":-0.08,"y":0,"z":0},
-			"scale":{"x":1,"y":1,"z":1}
-			}
-		 ]
+		{
+            "TypeDefName": "ModuleDef",
+            "definitionType": "Turret/Double Auto Turret",
+            "spritePath":"modules/Hardpoints_xcf-Turret_Mount__16px_",
+		    "spriteColor": {"r":0.7,"g":0.7,"b":0.7,"a":1},
+		    "hardpointSize":16,
+		    "hardpoints":[
+			    {
+			        "name":"right",
+			        "size":6,
+			        "position":{"x":0.08,"y":0,"z":0},
+			        "scale":{"x":1,"y":1,"z":1}
+			    },
+			    {
+			        "name":"left",
+			        "size":6,
+			        "position":{"x":-0.08,"y":0,"z":0},
+			        "scale":{"x":1,"y":1,"z":1}
+			    }
+		    ]
 		},
-		{"definitionType":"Turret/Large Single Turret",
-		 "spritePath":"modules/Hardpoints_xcf-Turret_Mount__32px_",
-		 "spriteColor": {"r":0.7,"g":0.7,"b":0.7,"a":1},
-		 "hardpointSize":32,
-		 "hardpoints":[
-			{
-			"name":"center",
-			"size":24,
-			"position":{"x":0,"y":0,"z":0},
-			"scale":{"x":1,"y":1,"z":1}
-			}
-		 ]
-		}
+        {
+            "TypeDefName": "ModuleDef",
+            "definitionType": "Turret/Large Single Turret",
+            "spritePath": "modules/Hardpoints_xcf-Turret_Mount__32px_",
+            "spriteColor": { "r": 0.7, "g": 0.7, "b": 0.7, "a": 1 },
+            "hardpointSize": 32,
+            "hardpoints": [
+                {
+                    "name": "center",
+                    "size": 24,
+                    "position": { "x": 0, "y": 0, "z": 0 },
+                    "scale": { "x": 1, "y": 1, "z": 1 }
+                }
+            ]
+        },
+        {
+            "TypeDefName": "ShieldGeneratorDef",
+            "definitionType": "Shield/Medium Balanced Shield Generator",
+            "spritePath": "modules/Hardpoints_xcf-Shield_Generator__16px_",
+            "spriteColor": { "r": 0.7, "g": 0.9, "b": 0.7, "a": 1 },
+            "hardpointSize": 16,
+            "energyCostPerSecond": 10,
+            "maxShield": 40,
+            "shieldRegen": 3
+        },
+        {
+            "TypeDefName": "ShieldGeneratorDef",
+            "definitionType": "Shield/Large Regen Shield Generator",
+            "spritePath": "modules/Hardpoints_xcf-Shield_Generator__32px_",
+            "spriteColor": { "r": 0.7, "g": 0.9, "b": 0.7, "a": 1 },
+            "hardpointSize": 32,
+            "energyCostPerSecond": 100,
+            "maxShield": 150,
+            "shieldRegen": 20
+        }
 	]
 }

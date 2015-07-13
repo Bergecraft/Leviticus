@@ -1,5 +1,6 @@
 ﻿using Assets.Entities;
 using Assets.Serialization;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace Assets.Modules
             def = DefinitionManager.GetDefinition<T>(selectedDefinition);
         }
         public string selectedDefinition;
+        [JsonIgnore]
         public T def { get; set; }
         //public void LoadDefinition(T def)
         //{

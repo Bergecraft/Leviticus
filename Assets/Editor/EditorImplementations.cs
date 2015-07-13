@@ -7,6 +7,7 @@ using Assets.Modules;
 using Assets.Entities.Modules.Weapons;
 using Assets.Entities.Modules.Thrusters;
 using Assets.Entities.Modules;
+using Assets.Entities.Modules.Shields;
 
 namespace Assets
 {
@@ -39,6 +40,12 @@ namespace Assets
     [CustomEditor(typeof(TurretBehaviour))]
     [CanEditMultipleObjects]
     public class TurretEditor : DynamicChoiceEditor<ModuleDef>
+    {
+
+    }
+    [CustomEditor(typeof(ShieldBehaviour))]
+    [CanEditMultipleObjects]
+    public class ShieldEditor : DynamicChoiceEditor<ShieldGeneratorDef>
     {
 
     }

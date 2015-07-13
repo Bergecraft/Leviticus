@@ -10,6 +10,7 @@ namespace Assets.Entities.Modules
 {
     public class ModuleDef : ItemDef
     {
+        public string TypeDefName { get; set; }
         public Hardpoint.HardpointSize hardpointSize { get; set; }
         public HardpointDef[] hardpoints { get; set; }
     }

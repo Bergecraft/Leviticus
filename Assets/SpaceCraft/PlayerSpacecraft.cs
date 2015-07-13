@@ -1,46 +1,49 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerSpacecraft : SpacecraftController
+public class PlayerSpacecraft : MonoBehaviour
 {
     public bool godMode = false;
     public bool reverse = false;
     public enum ControlMode { MouseFollow, Keyboard };
     public ControlMode controlMode = ControlMode.MouseFollow;
     Transform target;
-    public override void Update()
+    SpacecraftController spacecraft;
+    void Start()
     {
-        base.Update();
+        spacecraft = GetComponent<SpacecraftController>();
+    }
+    public void Update()
+    {
 
         HandleKeysForThrust();
         if (Input.GetKey(KeyCode.Space))
         {
-            FirePrimary();
+            spacecraft.FirePrimary();
         }
         if (Input.GetKeyDown(KeyCode.Z))
         {
             controlMode = controlMode==ControlMode.MouseFollow?ControlMode.Keyboard:ControlMode.MouseFollow;
         }
 
-        turretTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        spacecraft.turretTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (godMode)
         {
-            shield = MAX_SHIELD;
-            health = MAX_HEALTH;
+            spacecraft.shield.SetShieldPercentage(1);
+            spacecraft.SetHealth(spacecraft.MAX_HEALTH);
         }
     }
-    public override void FixedUpdate()
+    public void FixedUpdate()
     {
-        base.FixedUpdate();
         if (reverse)
         {
             var target = GetComponent<Rigidbody2D>().position - GetComponent<Rigidbody2D>().velocity;
-            TorqueTowards(target);
+            spacecraft.TorqueTowards(target);
         }
         else if (controlMode == ControlMode.MouseFollow)
         {
             var target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            TorqueTowards(target);
+            spacecraft.TorqueTowards(target);
         }
         else if (controlMode == ControlMode.Keyboard)
         {
@@ -63,20 +66,20 @@ public class PlayerSpacecraft : SpacecraftController
             }
             if (rotationTarget.magnitude > 0)
             {
-                TorqueTowards(transform.position + rotationTarget);
+                spacecraft.TorqueTowards(transform.position + rotationTarget);
                 var dot = Vector3.Dot(transform.up, rotationTarget);
                 if (dot > 0.8f)
                 {
-                    ActivateThrusters();
+                    spacecraft.ActivateThrusters();
                 }
                 else
                 {
-                    DeactivateThrusters();
+                    spacecraft.DeactivateThrusters();
                 }
             }
             else
             {
-                DeactivateThrusters();
+                spacecraft.DeactivateThrusters();
             }
         }
     }
@@ -87,19 +90,19 @@ public class PlayerSpacecraft : SpacecraftController
         {
             if (Input.GetKey(KeyCode.W))
             {
-                ActivateThrusters();
+                spacecraft.ActivateThrusters();
             }
             else
             {
-                DeactivateThrusters();
+                spacecraft.DeactivateThrusters();
             }
             if (Input.GetKey(KeyCode.A))
             {
-                GetComponent<Rigidbody2D>().AddRelativeForce(Vector2.left * MANEUVERING_THRUST);
+                spacecraft.StrafeTowardsRelative(Vector2.left);
             }
             if (Input.GetKey(KeyCode.D))
             {
-                GetComponent<Rigidbody2D>().AddRelativeForce(Vector2.right * MANEUVERING_THRUST);
+                spacecraft.StrafeTowardsRelative(Vector2.right);
             }
             reverse = false;
             if (Input.GetKey(KeyCode.S))
