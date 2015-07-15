@@ -9,5 +9,6 @@ namespace Assets.Entities.Modules.Shields
     {
         public float maxShield { get; set; }
         public float shieldRegen { get; set; }
+        public float defaultRadius { get; set; }
     }
 }

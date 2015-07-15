@@ -667,6 +667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DRAG_COEFF: 100
   blasters: []
+  shields: []
   MAX_HEALTH: 250
   faction: Rebel
 --- !u!114 &11416566

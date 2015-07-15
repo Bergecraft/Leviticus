@@ -29,7 +29,10 @@ public class PlayerSpacecraft : MonoBehaviour
         spacecraft.turretTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (godMode)
         {
-            spacecraft.shield.SetShieldPercentage(1);
+            foreach (var s in spacecraft.shields)
+            {
+                s.ShieldPercentage = 1;
+            }
             spacecraft.SetHealth(spacecraft.MAX_HEALTH);
         }
     }

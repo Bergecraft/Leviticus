@@ -48,7 +48,7 @@ public class AmmoBehaviour : SpriteBehaviour<AmmoDef>
             }
             else
             {
-                otherShip.Damage(def.bonusDamage + getRelativeVelocity(other.GetComponent<Rigidbody2D>()).magnitude * def.damageVelocityScalar);
+                otherShip.Damage(def.bonusDamage + getRelativeVelocity(other.GetComponent<Rigidbody2D>()).magnitude * def.damageVelocityScalar,transform.position,source);
                 Destroy(this.gameObject);
             }
         }

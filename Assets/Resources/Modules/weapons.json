@@ -162,7 +162,8 @@
             "hardpointSize": 16,
             "energyCostPerSecond": 10,
             "maxShield": 40,
-            "shieldRegen": 3
+            "shieldRegen": 3,
+            "defaultRadius": 0.6
         },
         {
             "TypeDefName": "ShieldGeneratorDef",
@@ -172,7 +173,8 @@
             "hardpointSize": 32,
             "energyCostPerSecond": 100,
             "maxShield": 150,
-            "shieldRegen": 20
+            "shieldRegen": 20,
+            "defaultRadius": 2.6
         }
 	]
 }

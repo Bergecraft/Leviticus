@@ -28,16 +28,22 @@ public class MessageController : MonoBehaviour {
         //var col = color ?? Color.white;
         if (color != null)
         {
-            message = "<color=#" + ColorToString(color.Value) + ">"+message+"</color>";
+            message = GetColoredString(message, color.Value);// "<color=#" + ColorToString(color.Value) + ">" + message + "</color>";
             //lastColor = col;7
         }
         var cont = transform.Find("Text Container");
-        go.AddComponent<Text>();
-        go.GetComponent<Text>().text = message;
-        go.GetComponent<Text>().fontSize = 12;
-        go.GetComponent<Text>().font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-        go.AddComponent<CanvasGroup>();
-        DOTween.To(() => go.GetComponent<CanvasGroup>().alpha, (a) => go.GetComponent<CanvasGroup>().alpha = a, 0.2f, 10);
+        var text = go.AddComponent<Text>();
+        text.text = message;
+        text.fontSize = 12;
+        text.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        text.horizontalOverflow = HorizontalWrapMode.Wrap;
+        text.verticalOverflow = VerticalWrapMode.Overflow;
+        //var le = go.AddComponent<LayoutElement>();
+        //le.preferredHeight = 16;
+        var csf = go.AddComponent<ContentSizeFitter>();
+        csf.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+        var cg = go.AddComponent<CanvasGroup>();
+        DOTween.To(() => cg.alpha, (a) => cg.alpha = a, 0.2f, 10);
         
         //go.AddComponent<LayoutElement>();
         //go.GetComponent<LayoutElement>().minHeight = 12;
@@ -49,7 +55,11 @@ public class MessageController : MonoBehaviour {
         //GetComponent<ScrollRect>().verticalNormalizedPosition += 10;
         //transform.position -= Vector3.up * 10;
     }
-    public string ColorToString(Color c)
+    public static string GetColoredString(string message, Color color)
+    {
+        return  "<color=#" + ColorToString(color) + ">" + message + "</color>";
+    }
+    public static string ColorToString(Color c)
     {
         return ((int)(c.r * 255)).ToString("X2") +
                ((int)(c.g * 255)).ToString("X2") +

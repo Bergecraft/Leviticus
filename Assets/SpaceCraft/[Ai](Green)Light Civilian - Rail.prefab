@@ -999,6 +999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DRAG_COEFF: 100
   blasters: []
+  shields: []
   MAX_HEALTH: 200
   faction: Imperial
 --- !u!114 &11473400

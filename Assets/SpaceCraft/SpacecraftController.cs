@@ -23,7 +23,7 @@ public class SpacecraftController : MonoBehaviour {
     [HideInInspector]
     protected RCSBehaviour[] rcs;
     [HideInInspector]
-    public ShieldBehaviour shield {get;set;}
+    public ShieldBehaviour[] shields;
     protected float throttle = 1.0f;
 
     private float health;
@@ -44,7 +44,7 @@ public class SpacecraftController : MonoBehaviour {
         mainThrusters = transform.GetComponentsInChildren<MainThrusterBehaviour>();
         blasters = transform.GetComponentsInChildren<WeaponBehaviour>();
         rcs = transform.GetComponentsInChildren<RCSBehaviour>();
-        shield = transform.GetComponentInChildren<ShieldBehaviour>();
+        shields = transform.GetComponentsInChildren<ShieldBehaviour>();
         ROTATE_SPEED = rcs.Select(r => r.transform.position.magnitude * r.def.thrust).Aggregate((sum, r) => sum + r);
         MANEUVERING_THRUST = rcs.Select(r => r.def.thrust).Aggregate((sum, r) => sum + r);
         status = Instantiate(Resources.Load<StatusBar>("Status"));
@@ -89,14 +89,36 @@ public class SpacecraftController : MonoBehaviour {
             thruster.Off();
         }
     }
-    public void Damage(float damage)
+    public string ColoredName
     {
-        var overflow = shield.Damage(damage);
+        get
+        {
+            var color = GetComponent<SpriteRenderer>().color;
+            return MessageController.GetColoredString(gameObject.name, color);
+        }
+    }
+    public void Damage(float damage,Vector3 position, SpacecraftController source = null)
+    {
+        var hitShields = shields.Where(s => s.Overlaps(position))
+            .OrderBy(s => s.ShieldPercentage).ToArray();
+        float overflow = damage;
+        if (hitShields.Length>0)
+        {
+            overflow = hitShields[0].Damage(damage, position);
+        }
         health = Mathf.Clamp(health - overflow, 0, MAX_HEALTH);
         //GameObject.FindObjectOfType<MessageController>().AddMessage(damage.ToString("n2") + " damage");
-                
+
+     
         if (health == 0)
         {
+            var deathMessage = ColoredName + " destroyed";
+            if (source != null)
+            {
+                deathMessage += " by " + source.ColoredName;
+            }
+            GameObject.FindObjectOfType<MessageController>().AddMessage(deathMessage);
+                
             var explo = Instantiate(Resources.Load<Transform>("Explosion"));
             explo.position = this.transform.position;
             Destroy(this.gameObject);
@@ -124,7 +146,7 @@ public class SpacecraftController : MonoBehaviour {
         velocity = GetComponent<Rigidbody2D>().velocity.magnitude;
         status.transform.position = transform.position;
         status.UpdateHealth(health / MAX_HEALTH);
-        status.UpdateShield(shield.ShieldPercentage);
+        status.UpdateShield(shields.Select(s => s.ShieldPercentage).Min());
 	}
     public virtual void FixedUpdate()
     {
