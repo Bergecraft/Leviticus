@@ -35,6 +35,7 @@ namespace Assets.Entities.Modules.Shields
 
         float radius;
         Sprite splashSprite;
+        Color DefaultColor = new Color(0.28f, 0.65f, 1);
         void Start()
         {
             base.Start();
@@ -68,27 +69,29 @@ namespace Assets.Entities.Modules.Shields
             return gameObject.GetComponent<CircleCollider2D>().radius;
         }
 
+        SpriteRenderer hexsr;
         private void CreateHexagonalPattern(Material mat)
         {
             var hexgo = new GameObject("Hex");
             hexgo.transform.parent = transform;
             hexgo.transform.localScale = new Vector3(radius, radius, 1);
             hexgo.transform.localPosition = Vector3.zero;
-            var hexsr = hexgo.AddComponent<SpriteRenderer>();
+            hexsr = hexgo.AddComponent<SpriteRenderer>();
             hexsr.sprite = Resources.Load<Sprite>("modules/HardpointsXL_xcf-FadedShieldBubbleHex");
-            hexsr.color = new Color(0.28f, 0.65f, 1);
+            hexsr.color = DefaultColor;
             hexsr.material = mat;
         }
 
+        SpriteRenderer bubblesr;
         private void CreateBubble(Material mat)
         {
             var bubblego = new GameObject("Bubble");
             bubblego.transform.parent = transform;
             bubblego.transform.localScale = new Vector3(radius, radius, 1);
             bubblego.transform.localPosition = Vector3.zero;
-            var bubblesr = bubblego.AddComponent<SpriteRenderer>();
+            bubblesr = bubblego.AddComponent<SpriteRenderer>();
             bubblesr.sprite = Resources.Load<Sprite>("modules/HardpointsXL_xcf-ShieldBubble");
-            bubblesr.color = new Color(0.28f, 0.65f, 1);
+            bubblesr.color = DefaultColor;
             bubblesr.material = mat;
         }
 
@@ -115,7 +118,12 @@ namespace Assets.Entities.Modules.Shields
             }
             var overflow = -Mathf.Min(Shield - damage, 0);
             Shield -= damage;
+            SetShieldColor(Color.Lerp(Color.red*0.3f, DefaultColor, ShieldPercentage));
             return overflow;
+        }
+        private void SetShieldColor(Color color){
+            hexsr.color = color;
+            bubblesr.color = color;
         }
         const float SPLASH_SIZE = 0.3f;
         const float SPLASH_FADE_TIME = 1f;
