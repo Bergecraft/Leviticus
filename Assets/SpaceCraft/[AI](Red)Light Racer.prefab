@@ -143,6 +143,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &162580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 417288}
+  - 114: {fileID: 11430428}
+  - 212: {fileID: 21270434}
+  - 114: {fileID: 11407342}
+  m_Layer: 0
+  m_Name: hardpoint (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &170200
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,7 +320,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.280000001, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 422148}
@@ -343,6 +361,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 422148}
   m_RootOrder: 3
+--- !u!4 &417288
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162580}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 422148}
+  m_RootOrder: 14
 --- !u!4 &422148
 Transform:
   m_ObjectHideFlags: 1
@@ -350,7 +380,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.7799997, y: 1.92999995, z: 0}
+  m_LocalPosition: {x: -19.2000008, y: -6.48999977, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 401212}
@@ -367,6 +397,7 @@ Transform:
   - {fileID: 412656}
   - {fileID: 471258}
   - {fileID: 401848}
+  - {fileID: 417288}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &423950
@@ -519,6 +550,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedDefinition: hybrid/blaster
   selectedAmmo: 
+--- !u!114 &11407342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f690108b3ef962a47b0f75c28ae922e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedDefinition: Shield/Medium Balanced Reactor
 --- !u!114 &11411884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -570,6 +613,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedDefinition: Shield/Medium Balanced Shield Generator
+--- !u!114 &11430428
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2774d8c5fb98b4b46ae3802f203ab692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 24
+  type: 0
 --- !u!114 &11436352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -693,6 +749,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DRAG_COEFF: 50
   blasters: []
+  shields: []
+  reactor: {fileID: 0}
   MAX_HEALTH: 100
   faction: Reaver
 --- !u!114 &11458506
@@ -1158,6 +1216,32 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 54ed67d4510c2784487c9d5032e9194e, type: 3}
   m_Color: {r: 0, g: 1, b: 0, a: 1}
+--- !u!212 &21270434
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 162580}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 45b42257f84861c4aa61c6606c597103, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21270624
 SpriteRenderer:
   m_ObjectHideFlags: 1

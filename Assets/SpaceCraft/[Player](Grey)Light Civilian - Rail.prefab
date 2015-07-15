@@ -668,6 +668,7 @@ MonoBehaviour:
   DRAG_COEFF: 100
   blasters: []
   shields: []
+  reactor: {fileID: 0}
   MAX_HEALTH: 250
   faction: Rebel
 --- !u!114 &11416566

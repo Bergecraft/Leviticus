@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Assets.Entities.Items;
 using Assets.Entities.Modules.Weapons;
 using Assets.Entities.Modules;
+using Assets.Entities.Modules.Reactors;
 
 public class WeaponBehaviour : SpriteBehaviour<WeaponDef>
 {
@@ -42,7 +43,8 @@ public class WeaponBehaviour : SpriteBehaviour<WeaponDef>
     {
         if (def != null && ammoPrefab !=null)
         {
-            if (Time.time - lastFire > def.cooldown)
+            if (Time.time - lastFire > def.cooldown &&
+                    parent.reactor.Use(def.energyCost))
             {
                 lastFire = Time.time;
                 var bullet = Instantiate(ammoPrefab);

@@ -1,4 +1,5 @@
 ﻿using Assets.Entities.Modules;
+using Assets.Entities.Modules.Reactors;
 using Assets.Entities.Modules.Shields;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -37,6 +38,9 @@ namespace Assets.Serialization
                             break;
                         case "ShieldGeneratorDef":
                             value = item.ToObject<ShieldGeneratorDef>();
+                            break;
+                        case "ReactorDef":
+                            value = item.ToObject<ReactorDef>();
                             break;
                         default:
                             value = item.ToObject<ModuleDef>();

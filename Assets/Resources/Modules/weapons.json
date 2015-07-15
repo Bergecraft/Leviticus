@@ -45,7 +45,7 @@
 		{"definitionType":"rail/large rail",
 		 "spritePath":"modules/HardpointsXL_xcf-Large_Rail__24px_",
 		 "spriteColor": {"r":0.3,"g":0.3,"b":0.3,"a":1},
-		 "energyCost":15,
+		 "energyCost":100,
 		 "cooldown":1.0,
 		 "mass":3000,
 		 "hardpointSize":24,
@@ -175,6 +175,26 @@
             "maxShield": 150,
             "shieldRegen": 20,
             "defaultRadius": 2.6
+        },
+        {
+            "TypeDefName": "ReactorDef",
+            "definitionType": "Shield/Medium Balanced Reactor",
+            "spritePath": "modules/Hardpoints_xcf-Medium_Reactor__24px_",
+            "spriteColor": { "r": 1, "g": 0.8, "b": 0, "a": 1 },
+            "hardpointSize": 24,
+            "energyCostPerSecond": 0,
+            "maxEnergy": 200,
+            "energyRegen": 50
+        },
+        {
+            "TypeDefName": "ReactorDef",
+            "definitionType": "Shield/Large Regen Reactor",
+            "spritePath": "modules/Hardpoints_xcf-Capital_Reactor__64px_",
+            "spriteColor": { "r": 1, "g": 0.8, "b": 0, "a": 1 },
+            "hardpointSize": 64,
+            "energyCostPerSecond": 0,
+            "maxEnergy": 1000,
+            "energyRegen": 300
         }
 	]
 }

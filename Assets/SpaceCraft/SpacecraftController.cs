@@ -9,6 +9,7 @@ using Assets.Entities.Modules.Thrusters;
 using System.Linq;
 using Assets.SpaceCraft;
 using Assets.Entities.Modules.Shields;
+using Assets.Entities.Modules.Reactors;
 
 public class SpacecraftController : MonoBehaviour {
 
@@ -24,6 +25,8 @@ public class SpacecraftController : MonoBehaviour {
     protected RCSBehaviour[] rcs;
     [HideInInspector]
     public ShieldBehaviour[] shields;
+    [HideInInspector]
+    public ReactorBehaviour reactor;
     protected float throttle = 1.0f;
 
     private float health;
@@ -45,6 +48,7 @@ public class SpacecraftController : MonoBehaviour {
         blasters = transform.GetComponentsInChildren<WeaponBehaviour>();
         rcs = transform.GetComponentsInChildren<RCSBehaviour>();
         shields = transform.GetComponentsInChildren<ShieldBehaviour>();
+        reactor = transform.GetComponentInChildren<ReactorBehaviour>();
         ROTATE_SPEED = rcs.Select(r => r.transform.position.magnitude * r.def.thrust).Aggregate((sum, r) => sum + r);
         MANEUVERING_THRUST = rcs.Select(r => r.def.thrust).Aggregate((sum, r) => sum + r);
         status = Instantiate(Resources.Load<StatusBar>("Status"));
@@ -147,6 +151,7 @@ public class SpacecraftController : MonoBehaviour {
         status.transform.position = transform.position;
         status.UpdateHealth(health / MAX_HEALTH);
         status.UpdateShield(shields.Select(s => s.ShieldPercentage).Min());
+        status.UpdateEnergy(reactor.EnergyPercentage);
 	}
     public virtual void FixedUpdate()
     {
