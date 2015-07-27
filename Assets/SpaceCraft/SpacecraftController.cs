@@ -59,6 +59,8 @@ public class SpacecraftController : MonoBehaviour {
 
         manager = GameObject.FindObjectOfType<SpacecraftManager>();
         manager.Add(this);
+
+        GetComponent<SpriteRenderer>().sortingOrder = -1;
 	}
 
     private void CreateIcon()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Modules;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,15 @@ namespace Assets.Entities.Modules
         {
             base.Start();
             controller = transform.GetComponentInParent<SpacecraftController>();
+
+            var childsort = GetComponent<SpriteRenderer>().sortingOrder +2;
+            foreach (var hp in GetComponentsInChildren<Hardpoint>())
+            {
+                if (hp.gameObject != gameObject)
+                {
+                    hp.GetComponent<SpriteRenderer>().sortingOrder = childsort;
+                }
+            }
         }
         void Update()
         {

@@ -80,6 +80,7 @@ namespace Assets.Entities.Modules.Shields
             hexsr.sprite = Resources.Load<Sprite>("modules/HardpointsXL_xcf-FadedShieldBubbleHex");
             hexsr.color = DefaultColor;
             hexsr.material = mat;
+            hexsr.sortingOrder = 10;
         }
 
         SpriteRenderer bubblesr;
@@ -93,6 +94,7 @@ namespace Assets.Entities.Modules.Shields
             bubblesr.sprite = Resources.Load<Sprite>("modules/HardpointsXL_xcf-ShieldBubble");
             bubblesr.color = DefaultColor;
             bubblesr.material = mat;
+            bubblesr.sortingOrder = 10;
         }
 
         private void CreateShieldSplashCamera(RenderTexture rt)
